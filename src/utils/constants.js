@@ -1,0 +1,9 @@
+export const BREAK_INTERVAL_MS = 20 * 60 * 1000;
+export const BREAK_DURATION_S = 20;
+export const TICK_MS = 100;
+export const RING_RADIUS = 110;
+export const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
+export const STORAGE_KEY = 'twenty-v2';
+export const SETTINGS_KEY = `${STORAGE_KEY}-settings`;
+export const SESSIONS_KEY = `${STORAGE_KEY}-sessions`;
+export const PROFILES_KEY = `${STORAGE_KEY}-profiles`;
