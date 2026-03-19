@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_base">#080810</color>
+    <color name="bg_elevated">#0f0f1e</color>
+    <color name="ic_launcher_background">#080810</color>
+    <string name="app_name">Twenty ·³</string>
+    <style name="Theme.Twenty" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/bg_base</item>
+        <item name="android:statusBarColor">@color/bg_base</item>
+        <item name="android:navigationBarColor">@color/bg_base</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

@@ -9,12 +9,21 @@ android {
     namespace = "com.twenty.app"
     compileSdk = 35
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("twenty-release.jks")
+            storePassword = "twenty2020"
+            keyAlias = "twenty"
+            keyPassword = "twenty2020"
+        }
+    }
+
     defaultConfig {
         applicationId = "com.twenty.app"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
-        versionName = "1.0.0"
+        versionName = "0.0.1"
     }
 
     buildTypes {
@@ -24,6 +33,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
         debug {
             isMinifyEnabled = false
