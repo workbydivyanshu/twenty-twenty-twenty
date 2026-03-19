@@ -19,6 +19,8 @@ class NotificationHelper(private val context: Context) {
         const val ACTION_STOP = "com.twenty.app.ACTION_STOP"
         const val ACTION_BREAK_CONFIRM = "com.twenty.app.ACTION_BREAK_CONFIRM"
         const val ACTION_BREAK_SKIP = "com.twenty.app.ACTION_BREAK_SKIP"
+        const val ACTION_BREAK_TAKE = "com.twenty.app.ACTION_BREAK_TAKE"
+        const val ACTION_BREAK_SKIP_SESSION = "com.twenty.app.ACTION_BREAK_SKIP_SESSION"
     }
 
     private val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -44,6 +46,7 @@ class NotificationHelper(private val context: Context) {
     fun buildNotification(
         title: String,
         content: String,
+        isBreakPending: Boolean = false,
         isBreakActive: Boolean = false,
         isSessionActive: Boolean = false,
         isBreakConfirmPending: Boolean = false
@@ -78,6 +81,18 @@ class NotificationHelper(private val context: Context) {
                     android.R.drawable.ic_menu_close_clear_cancel,
                     "No, I didn't",
                     createActionPendingIntent(ACTION_BREAK_SKIP)
+                )
+            }
+            isBreakPending -> {
+                builder.addAction(
+                    android.R.drawable.ic_menu_view,
+                    "Take Break",
+                    createActionPendingIntent(ACTION_BREAK_TAKE)
+                )
+                builder.addAction(
+                    android.R.drawable.ic_menu_close_clear_cancel,
+                    "Skip Session",
+                    createActionPendingIntent(ACTION_BREAK_SKIP_SESSION)
                 )
             }
             isBreakActive -> {

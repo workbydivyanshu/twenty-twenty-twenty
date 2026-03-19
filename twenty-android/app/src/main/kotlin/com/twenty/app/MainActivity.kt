@@ -75,6 +75,17 @@ class MainActivity : ComponentActivity() {
                     }
                     hapticFeedback.light()
                 }
+                NotificationHelper.ACTION_BREAK_TAKE -> {
+                    sessionViewModel.handleBreakTake()
+                }
+                NotificationHelper.ACTION_BREAK_SKIP_SESSION -> {
+                    lifecycleScope.launch {
+                        val sessions = storage.sessionsFlow.first()
+                        sessionViewModel.handleEnd(sessions) { updated ->
+                            lifecycleScope.launch { storage.saveSessions(updated) }
+                        }
+                    }
+                }
             }
         }
     }
@@ -98,6 +109,8 @@ class MainActivity : ComponentActivity() {
             addAction(NotificationHelper.ACTION_STOP)
             addAction(NotificationHelper.ACTION_BREAK_CONFIRM)
             addAction(NotificationHelper.ACTION_BREAK_SKIP)
+            addAction(NotificationHelper.ACTION_BREAK_TAKE)
+            addAction(NotificationHelper.ACTION_BREAK_SKIP_SESSION)
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             registerReceiver(notificationReceiver, filter, RECEIVER_NOT_EXPORTED)
@@ -153,11 +166,15 @@ class MainActivity : ComponentActivity() {
                 when {
                     isBreakActive -> {
                         startForegroundService()
-                        startNotificationUpdateLoop(true)
+                        startNotificationUpdateLoop()
+                    }
+                    sessionState == "break_pending" -> {
+                        startForegroundService()
+                        startNotificationUpdateLoop()
                     }
                     isRunning -> {
                         startForegroundService()
-                        startNotificationUpdateLoop(false)
+                        startNotificationUpdateLoop()
                     }
                     else -> {
                         stopForegroundService()
@@ -203,7 +220,7 @@ class MainActivity : ComponentActivity() {
         startService(intent)
     }
 
-    private fun startNotificationUpdateLoop(isBreakActive: Boolean) {
+    private fun startNotificationUpdateLoop() {
         notificationUpdateJob?.cancel()
         notificationUpdateJob = lifecycleScope.launch {
             while (isActive) {
@@ -217,6 +234,7 @@ class MainActivity : ComponentActivity() {
                     currentSessionState == "break_pending" -> "Time for a break!"
                     currentBreakActive && currentBreakCountdown > 0 -> "Break Time!"
                     currentBreakActive -> "Break Complete!"
+                    isRunning -> "Twenty ·³"
                     else -> "Twenty ·³"
                 }
 
@@ -224,12 +242,14 @@ class MainActivity : ComponentActivity() {
                     currentSessionState == "break_pending" -> "Tap to take your 20-second break"
                     currentBreakActive && currentBreakCountdown > 0 -> "Look away · ${currentBreakCountdown}s remaining"
                     currentBreakActive -> "Did you rest your eyes?"
+                    isRunning -> formatDuration(elapsed)
                     else -> formatDuration(elapsed)
                 }
 
                 val notification = notificationHelper.buildNotification(
                     title = title,
                     content = content,
+                    isBreakPending = currentSessionState == "break_pending",
                     isBreakActive = currentBreakActive && currentBreakCountdown > 0,
                     isSessionActive = !currentBreakActive && isRunning,
                     isBreakConfirmPending = currentBreakActive && currentBreakCountdown == 0
