@@ -14,8 +14,6 @@ export function useTimer() {
     }
   }, []);
 
-  tickRef.current = tick;
-
   const start = useCallback(() => {
     startRef.current = Date.now() - pausedRef.current;
     setIsRunning(true);
@@ -36,6 +34,7 @@ export function useTimer() {
     }
     if (startRef.current !== null) {
       pausedRef.current = Date.now() - startRef.current;
+      startRef.current = null;
     }
     setIsRunning(false);
     return pausedRef.current;
@@ -48,6 +47,7 @@ export function useTimer() {
     }
     if (startRef.current !== null) {
       pausedRef.current = Date.now() - startRef.current;
+      startRef.current = null;
     }
     setIsRunning(false);
   }, []);

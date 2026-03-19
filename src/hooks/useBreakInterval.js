@@ -13,6 +13,8 @@ export function useBreakInterval(getElapsed, isRunning, onTrigger) {
     }
   }, []);
 
+  const lastTriggeredPeriodRef = useRef(0);
+
   useEffect(() => {
     if (!isRunning) {
       clearInterval();
@@ -20,16 +22,19 @@ export function useBreakInterval(getElapsed, isRunning, onTrigger) {
       return;
     }
 
+    lastTriggeredPeriodRef.current = Math.floor(getElapsed() / BREAK_INTERVAL_MS);
+
     const tick = () => {
       const elapsedMs = getElapsed();
-      const breakPosition = elapsedMs % BREAK_INTERVAL_MS;
-      const remaining = BREAK_INTERVAL_MS - breakPosition;
+      const currentPeriod = Math.floor(elapsedMs / BREAK_INTERVAL_MS);
 
-      if (remaining <= 0) {
+      if (currentPeriod > lastTriggeredPeriodRef.current) {
+        lastTriggeredPeriodRef.current = currentPeriod;
         clearInterval();
         setNextBreakIn(0);
         if (onTrigger) onTrigger();
       } else {
+        const remaining = BREAK_INTERVAL_MS - (elapsedMs % BREAK_INTERVAL_MS);
         setNextBreakIn(Math.ceil(remaining / 1000));
       }
     };
