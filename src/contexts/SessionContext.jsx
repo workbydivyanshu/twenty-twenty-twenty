@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { useTimer } from '../hooks/useTimer';
 import { useBreakInterval } from '../hooks/useBreakInterval';
@@ -19,22 +19,47 @@ export function SessionProvider({ children, activeProfileId = 'default' }) {
   const [completedSession, setCompletedSession] = useState(null);
   const [sessionStartTime, setSessionStartTime] = useState(null);
   const [currentProfileId, setCurrentProfileId] = useState(activeProfileId);
+  const [breakCountdown, setBreakCountdown] = useState(0);
 
   const sound = useSound();
-  const { elapsed, isRunning, start, stop, reset, getElapsed } = useTimer();
+  const { elapsed, isRunning, start, stop, pause, resumeAfterBreak, reset, getElapsed } = useTimer();
   const { saveSession } = useSessionStore(currentProfileId);
+  const countdownRef = useRef(null);
+  const lastBreakElapsedRef = useRef(0);
 
   const handleBreakTrigger = useCallback(() => {
+    lastBreakElapsedRef.current = getElapsed();
+    pause();
     setBreaksTriggered(prev => prev + 1);
+    setSessionState('break_pending');
     if (settings.soundEnabled) sound.playBreakChime(volume);
     try { Haptics.impact({ style: ImpactStyle.Heavy }); } catch { /* ignore haptics */ }
-  }, [sound, settings.soundEnabled, volume]);
+  }, [pause, sound, settings.soundEnabled, volume, getElapsed]);
 
-  const { isBreakActive, breakCountdown, nextBreakIn, endBreak } = useBreakInterval(
-    getElapsed,
-    isRunning,
-    handleBreakTrigger
-  );
+  const { nextBreakIn } = useBreakInterval(getElapsed, isRunning, handleBreakTrigger);
+
+  const handleStartBreakCountdown = useCallback(() => {
+    setBreakCountdown(20);
+    setSessionState('break_active');
+    countdownRef.current = setInterval(() => {
+      setBreakCountdown(prev => {
+        if (prev <= 1) {
+          clearInterval(countdownRef.current);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  }, []);
+
+  const handleEndBreakCountdown = useCallback(() => {
+    if (countdownRef.current) {
+      clearInterval(countdownRef.current);
+      countdownRef.current = null;
+    }
+    lastBreakElapsedRef.current = getElapsed();
+    setBreakCountdown(0);
+  }, [getElapsed]);
 
   const handleStart = useCallback(async () => {
     setCurrentProfileId(activeProfileId);
@@ -43,6 +68,7 @@ export function SessionProvider({ children, activeProfileId = 'default' }) {
     setBreaksSkipped(0);
     setBreaksTriggered(0);
     setCompletedSession(null);
+    setBreakCountdown(0);
     const now = Date.now();
     setSessionStartTime(now);
     setSessionState('active');
@@ -72,25 +98,31 @@ export function SessionProvider({ children, activeProfileId = 'default' }) {
     try { await Haptics.impact({ style: ImpactStyle.Heavy }); } catch { /* ignore haptics */ }
   }, [stop, sessionStartTime, breaksTriggered, breaksTaken, breaksSkipped, saveSession, sound, settings.soundEnabled, volume, currentProfileId]);
 
+  const handleBreakTake = useCallback(() => {
+    handleStartBreakCountdown();
+  }, [handleStartBreakCountdown]);
+
+  const handleBreakSkipSession = useCallback(async () => {
+    await handleEnd();
+  }, [handleEnd]);
+
   const handleBreakConfirm = useCallback(async () => {
-    endBreak();
+    handleEndBreakCountdown();
+    resumeAfterBreak();
     setBreaksTaken(prev => prev + 1);
     setSessionState('active');
     if (settings.soundEnabled) sound.playConfirm(volume);
     try { await Haptics.impact({ style: ImpactStyle.Light }); } catch { /* ignore haptics */ }
-  }, [endBreak, sound, settings.soundEnabled, volume]);
+  }, [handleEndBreakCountdown, resumeAfterBreak, sound, settings.soundEnabled, volume]);
 
   const handleBreakSkip = useCallback(async () => {
-    endBreak();
+    handleEndBreakCountdown();
+    resumeAfterBreak();
     setBreaksSkipped(prev => prev + 1);
     setSessionState('active');
     if (settings.soundEnabled) sound.playSkip(volume);
     try { await Haptics.impact({ style: ImpactStyle.Light }); } catch { /* ignore haptics */ }
-  }, [endBreak, sound, settings.soundEnabled, volume]);
-
-  const handleBreakEnter = useCallback(() => {
-    setSessionState('break');
-  }, []);
+  }, [handleEndBreakCountdown, resumeAfterBreak, sound, settings.soundEnabled, volume]);
 
   const handleDismissSummary = useCallback(() => {
     setSessionState('idle');
@@ -102,9 +134,8 @@ export function SessionProvider({ children, activeProfileId = 'default' }) {
     sessionState,
     elapsed,
     isRunning,
-    isBreakActive,
-    breakCountdown,
     nextBreakIn,
+    breakCountdown,
     breaksTaken,
     breaksSkipped,
     breaksTriggered,
@@ -112,9 +143,10 @@ export function SessionProvider({ children, activeProfileId = 'default' }) {
     currentProfileId,
     handleStart,
     handleEnd,
+    handleBreakTake,
+    handleBreakSkipSession,
     handleBreakConfirm,
     handleBreakSkip,
-    handleBreakEnter,
     handleDismissSummary,
   };
 

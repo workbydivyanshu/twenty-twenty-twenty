@@ -34,6 +34,26 @@ export function useTimer() {
     return pausedRef.current;
   }, []);
 
+  const pause = useCallback(() => {
+    if (tickRef.current) {
+      clearInterval(tickRef.current);
+      tickRef.current = null;
+    }
+    if (startRef.current !== null) {
+      pausedRef.current = Date.now() - startRef.current;
+    }
+    setIsRunning(false);
+  }, []);
+
+  const resumeAfterBreak = useCallback(() => {
+    if (startRef.current !== null) {
+      pausedRef.current = Date.now() - startRef.current;
+    }
+    startRef.current = Date.now() - pausedRef.current;
+    setIsRunning(true);
+    tickRef.current = setInterval(tick, TICK_MS);
+  }, [tick]);
+
   const reset = useCallback(() => {
     if (tickRef.current) {
       clearInterval(tickRef.current);
@@ -60,5 +80,5 @@ export function useTimer() {
     };
   }, []);
 
-  return { elapsed, isRunning, start, stop, reset, getElapsed };
+  return { elapsed, isRunning, start, stop, pause, resumeAfterBreak, reset, getElapsed };
 }

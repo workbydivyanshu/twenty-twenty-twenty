@@ -108,17 +108,23 @@ function HomeView() {
 }
 
 function BreakOverlayLayer() {
-  const { sessionState, breakCountdown, handleBreakConfirm, handleBreakSkip, handleBreakEnter, handleEnd } = useSession();
+  const {
+    sessionState, breakCountdown,
+    handleBreakTake, handleBreakSkipSession,
+    handleBreakConfirm, handleBreakSkip, handleEnd
+  } = useSession();
 
-  if (sessionState !== 'break') return null;
+  if (sessionState !== 'break_pending' && sessionState !== 'break_active') return null;
 
   return (
     <BreakOverlay
+      sessionState={sessionState}
       countdown={breakCountdown}
+      onTakeBreak={handleBreakTake}
+      onSkipSession={handleBreakSkipSession}
       onConfirm={handleBreakConfirm}
       onSkip={handleBreakSkip}
       onEndSession={handleEnd}
-      onEnter={handleBreakEnter}
     />
   );
 }

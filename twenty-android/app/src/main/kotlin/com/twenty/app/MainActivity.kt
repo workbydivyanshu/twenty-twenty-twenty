@@ -144,11 +144,12 @@ class MainActivity : ComponentActivity() {
                 )
             }
 
+            val sessionState by sessionViewModel.sessionState.collectAsState()
             val isBreakActive by timerViewModel.isBreakActive.collectAsState()
             val breakCountdown by timerViewModel.breakCountdown.collectAsState()
             val isRunning by timerViewModel.isRunning.collectAsState()
 
-            LaunchedEffect(isRunning, isBreakActive) {
+            LaunchedEffect(isRunning, isBreakActive, sessionState) {
                 when {
                     isBreakActive -> {
                         startForegroundService()
@@ -210,14 +211,17 @@ class MainActivity : ComponentActivity() {
                 val currentBreakActive = timerViewModel.isBreakActive.value
                 val currentBreakCountdown = timerViewModel.breakCountdown.value
                 val isRunning = timerViewModel.isRunning.value
+                val currentSessionState = sessionViewModel.sessionState.value
 
                 val title = when {
+                    currentSessionState == "break_pending" -> "Time for a break!"
                     currentBreakActive && currentBreakCountdown > 0 -> "Break Time!"
                     currentBreakActive -> "Break Complete!"
                     else -> "Twenty ·³"
                 }
 
                 val content = when {
+                    currentSessionState == "break_pending" -> "Tap to take your 20-second break"
                     currentBreakActive && currentBreakCountdown > 0 -> "Look away · ${currentBreakCountdown}s remaining"
                     currentBreakActive -> "Did you rest your eyes?"
                     else -> formatDuration(elapsed)

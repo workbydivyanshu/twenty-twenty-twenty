@@ -1,20 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { RING_CIRCUMFERENCE } from '../utils/constants';
 
-export default function BreakOverlay({ countdown, onConfirm, onSkip, onEndSession, onEnter }) {
-  const [showConfirmPrompt, setShowConfirmPrompt] = useState(false);
+export default function BreakOverlay({
+  sessionState,
+  countdown,
+  onTakeBreak,
+  onSkipSession,
+  onConfirm,
+  onSkip,
+  onEndSession,
+}) {
   const [showEndDialog, setShowEndDialog] = useState(false);
 
-  useEffect(() => {
-    if (onEnter) onEnter();
-  }, [onEnter]);
-
-  useEffect(() => {
-    if (countdown === 0) {
-      setShowConfirmPrompt(true);
-    }
-  }, [countdown]);
-
+  const isPending = sessionState === 'break_pending';
+  const isCountdownActive = sessionState === 'break_active' && countdown > 0;
+  const showConfirmPrompt = sessionState === 'break_active' && countdown === 0;
   const progress = countdown > 0 ? (20 - countdown) / 20 : 1;
   const dashOffset = RING_CIRCUMFERENCE * (1 - progress);
 
@@ -29,7 +29,37 @@ export default function BreakOverlay({ countdown, onConfirm, onSkip, onEndSessio
         </defs>
       </svg>
 
-      {countdown > 0 ? (
+      {isPending && (
+        <div className="break-confirm-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 6v6M12 16v.01" />
+          </svg>
+        </div>
+      )}
+
+      {isPending && (
+        <>
+          <div className="break-title" id="break-title">
+            Time for a break!
+          </div>
+          <div className="break-subtitle">
+            20 minutes of screen time.
+            <br />
+            Take a moment to rest your eyes.
+          </div>
+          <div className="break-actions">
+            <button className="btn-ghost" onClick={onSkipSession}>
+              Skip Session
+            </button>
+            <button className="btn-primary" onClick={onTakeBreak}>
+              Take Break
+            </button>
+          </div>
+        </>
+      )}
+
+      {isCountdownActive && (
         <>
           <div className="break-ring-wrap">
             <svg className="break-ring-svg" width="240" height="240" viewBox="0 0 240 240">
@@ -47,22 +77,21 @@ export default function BreakOverlay({ countdown, onConfirm, onSkip, onEndSessio
             </div>
           </div>
 
-          <div className="break-title" id="break-title">
-            Rest your eyes
-          </div>
-
+          <div className="break-title">Rest your eyes</div>
           <div className="break-subtitle">
-            Look at something 20 feet away.<br />Give your eyes a break.
+            20 feet away · 20 seconds
           </div>
 
           <div className="break-rule">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M12 2v20M2 12h20"/>
             </svg>
-            20 feet · 20 seconds
+            Look away from your screen
           </div>
         </>
-      ) : showConfirmPrompt ? (
+      )}
+
+      {showConfirmPrompt && (
         <>
           <div className="break-confirm-icon">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -76,7 +105,9 @@ export default function BreakOverlay({ countdown, onConfirm, onSkip, onEndSessio
           </div>
 
           <div className="break-subtitle">
-            Looked at something 20 feet away<br />for 20 seconds
+            Looked at something 20 feet away
+            <br />
+            for 20 seconds
           </div>
 
           <div className="break-actions">
@@ -88,7 +119,7 @@ export default function BreakOverlay({ countdown, onConfirm, onSkip, onEndSessio
             </button>
           </div>
         </>
-      ) : null}
+      )}
 
       {showEndDialog && (
         <div className="end-dialog-overlay">
@@ -98,14 +129,12 @@ export default function BreakOverlay({ countdown, onConfirm, onSkip, onEndSessio
             <div className="end-dialog-actions">
               <button className="btn-ghost" onClick={() => {
                 setShowEndDialog(false);
-                setShowConfirmPrompt(false);
                 onSkip();
               }}>
                 Continue anyway
               </button>
               <button className="btn-danger" onClick={() => {
                 setShowEndDialog(false);
-                setShowConfirmPrompt(false);
                 onEndSession();
               }}>
                 End Session

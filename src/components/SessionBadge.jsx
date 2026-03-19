@@ -5,7 +5,10 @@ export default function SessionBadge({ state }) {
   if (state === 'active') {
     label = 'Active Session';
     cls = 'active';
-  } else if (state === 'break') {
+  } else if (state === 'break_pending') {
+    label = 'Break Time';
+    cls = 'break';
+  } else if (state === 'break_active') {
     label = 'Taking a Break';
     cls = 'break';
   }
