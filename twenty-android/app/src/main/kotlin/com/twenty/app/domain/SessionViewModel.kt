@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.twenty.app.data.Session
 import com.twenty.app.data.Storage
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -36,10 +38,14 @@ class SessionViewModel(
     private var onBreakConfirmed: (() -> Unit)? = null
     private var onBreakSkipped: (() -> Unit)? = null
 
+    private var pendingElapsedAtPause: Long = 0
+
     init {
         timerViewModel.setBreakTriggerListener {
+            pendingElapsedAtPause = timerViewModel.elapsed.value
+            timerViewModel.pause()
             _breaksTriggered.value = _breaksTriggered.value + 1
-            _sessionState.value = "break"
+            _sessionState.value = "break_pending"
         }
     }
 
@@ -68,7 +74,8 @@ class SessionViewModel(
     }
 
     fun handleEnd(sessions: List<Session>, onSave: (List<Session>) -> Unit) {
-        val elapsed = timerViewModel.stop()
+        timerViewModel.stop()
+        val elapsed = timerViewModel.elapsed.value
         val endTime = System.currentTimeMillis()
 
         val session = Session(
@@ -91,17 +98,30 @@ class SessionViewModel(
         _sessionState.value = "summary"
     }
 
+    fun handleBreakTake() {
+        _sessionState.value = "break_active"
+        timerViewModel.startBreakCountdown()
+    }
+
+    fun handleBreakSkipSession() {
+        handleEnd(emptyList()) { updated ->
+            viewModelScope.launch { storage.saveSessions(updated) }
+        }
+    }
+
     fun handleBreakConfirm() {
-        timerViewModel.endBreak()
+        timerViewModel.endBreakCountdown()
         _breaksTaken.value = _breaksTaken.value + 1
         _sessionState.value = "active"
+        timerViewModel.resumeAfterBreak()
         onBreakConfirmed?.invoke()
     }
 
     fun handleBreakSkip() {
-        timerViewModel.endBreak()
+        timerViewModel.endBreakCountdown()
         _breaksSkipped.value = _breaksSkipped.value + 1
         _sessionState.value = "active"
+        timerViewModel.resumeAfterBreak()
         onBreakSkipped?.invoke()
     }
 

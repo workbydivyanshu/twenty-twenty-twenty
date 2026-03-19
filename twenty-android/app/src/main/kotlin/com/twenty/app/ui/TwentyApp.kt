@@ -100,8 +100,11 @@ fun TwentyApp(
         ) { padding ->
             Box(modifier = Modifier.padding(padding)) {
                 when {
-                    isBreakActive -> BreakOverlayScreen(
+                    sessionState == "break_pending" || sessionState == "break_active" -> BreakOverlayScreen(
+                        sessionState = sessionState,
                         countdown = breakCountdown,
+                        onTakeBreak = { sessionViewModel.handleBreakTake() },
+                        onSkipSession = { sessionViewModel.handleBreakSkipSession() },
                         onConfirm = { sessionViewModel.handleBreakConfirm() },
                         onSkip = { sessionViewModel.handleBreakSkip() },
                         onEndSession = { sessionViewModel.handleEnd(sessions, onSaveSessions) }

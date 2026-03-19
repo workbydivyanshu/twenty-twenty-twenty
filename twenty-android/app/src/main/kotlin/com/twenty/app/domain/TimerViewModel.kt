@@ -28,7 +28,7 @@ class TimerViewModel : ViewModel() {
     private val _nextBreakIn = MutableStateFlow<Int?>(null)
     val nextBreakIn: StateFlow<Int?> = _nextBreakIn.asStateFlow()
 
-    private val _breakCountdown = MutableStateFlow(20)
+    private val _breakCountdown = MutableStateFlow(0)
     val breakCountdown: StateFlow<Int> = _breakCountdown.asStateFlow()
 
     private val _isBreakActive = MutableStateFlow(false)
@@ -63,13 +63,31 @@ class TimerViewModel : ViewModel() {
         return currentElapsed
     }
 
+    fun pause() {
+        if (!_isRunning.value) return
+        pausedElapsed = sessionStartTime?.let { System.currentTimeMillis() - it } ?: pausedElapsed
+        _isRunning.value = false
+        _nextBreakIn.value = null
+        stopTick()
+        stopBreakInterval()
+    }
+
+    fun resumeAfterBreak() {
+        if (_isRunning.value) return
+        sessionStartTime = System.currentTimeMillis() - pausedElapsed
+        lastBreakTime = sessionStartTime!!
+        _isRunning.value = true
+        startTick()
+        startBreakInterval()
+    }
+
     fun reset() {
         stop()
         _elapsed.value = 0
         pausedElapsed = 0
         sessionStartTime = null
         lastBreakTime = 0
-        _breakCountdown.value = 20
+        _breakCountdown.value = 0
         _isBreakActive.value = false
     }
 
@@ -97,7 +115,7 @@ class TimerViewModel : ViewModel() {
                 val remaining = BREAK_INTERVAL_MS - sinceLastBreak
 
                 if (remaining <= 0 && !_isBreakActive.value) {
-                    triggerBreak()
+                    onBreakTrigger?.invoke()
                 } else if (!_isBreakActive.value) {
                     _nextBreakIn.value = (remaining / 1000).toInt()
                 }
@@ -111,25 +129,22 @@ class TimerViewModel : ViewModel() {
         intervalJob = null
     }
 
-    private fun triggerBreak() {
+    fun startBreakCountdown() {
         _isBreakActive.value = true
         _breakCountdown.value = 20
-        onBreakTrigger?.invoke()
 
         viewModelScope.launch {
-            while (_breakCountdown.value > 0 && _isBreakActive.value) {
+            while (_breakCountdown.value > 0) {
                 delay(1000)
                 _breakCountdown.value = _breakCountdown.value - 1
             }
         }
     }
 
-    fun endBreak() {
-        sessionStartTime?.let {
-            lastBreakTime = System.currentTimeMillis() - it
-        }
+    fun endBreakCountdown() {
         _isBreakActive.value = false
-        _breakCountdown.value = 20
+        _breakCountdown.value = 0
+        lastBreakTime = sessionStartTime?.let { System.currentTimeMillis() - it } ?: 0L
     }
 
     fun onAppBackground() {
