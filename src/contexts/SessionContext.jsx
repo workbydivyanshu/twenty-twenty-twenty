@@ -21,7 +21,7 @@ export function SessionProvider({ children, activeProfileId = 'default' }) {
   const [currentProfileId, setCurrentProfileId] = useState(activeProfileId);
 
   const sound = useSound();
-  const { elapsed, isRunning, start, stop, reset } = useTimer();
+  const { elapsed, isRunning, start, stop, reset, getElapsed } = useTimer();
   const { saveSession } = useSessionStore(currentProfileId);
 
   const handleBreakTrigger = useCallback(() => {
@@ -31,6 +31,7 @@ export function SessionProvider({ children, activeProfileId = 'default' }) {
   }, [sound, settings.soundEnabled, volume]);
 
   const { isBreakActive, breakCountdown, nextBreakIn, endBreak } = useBreakInterval(
+    getElapsed,
     isRunning,
     handleBreakTrigger
   );
@@ -42,7 +43,8 @@ export function SessionProvider({ children, activeProfileId = 'default' }) {
     setBreaksSkipped(0);
     setBreaksTriggered(0);
     setCompletedSession(null);
-    setSessionStartTime(new Date().toISOString());
+    const now = Date.now();
+    setSessionStartTime(now);
     setSessionState('active');
     start();
     if (settings.soundEnabled) sound.playStart(volume);
@@ -52,7 +54,7 @@ export function SessionProvider({ children, activeProfileId = 'default' }) {
   const handleEnd = useCallback(async () => {
     const finalElapsed = stop();
     const endTime = new Date().toISOString();
-    const startTime = sessionStartTime || new Date(Date.now() - finalElapsed).toISOString();
+    const startTime = sessionStartTime ? new Date(sessionStartTime).toISOString() : new Date(Date.now() - finalElapsed).toISOString();
 
     const session = {
       startTime,

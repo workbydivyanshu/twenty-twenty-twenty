@@ -1,6 +1,8 @@
 package com.twenty.app.ui.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -249,19 +251,12 @@ fun StreakCalendarView(days: List<CalendarDay>) {
                                 modifier = Modifier
                                     .size(10.dp)
                                     .clip(RoundedCornerShape(2.dp))
-                                    .background(
-                                        when {
-                                            day.hasSession -> AccentPrimary
-                                            else -> Color(0x0Dffffff)
-                                        }
+                                    .border(
+                                        if (day.isToday && !day.hasSession) BorderStroke(1.dp, AccentPrimary) else BorderStroke(0.dp, Color.Transparent),
+                                        RoundedCornerShape(2.dp)
                                     )
-                                    .then(
-                                        if (day.isToday) Modifier
-                                            .background(Color.Transparent)
-                                            .padding(1.dp)
-                                            .clip(RoundedCornerShape(2.dp))
-                                            .background(AccentPrimary)
-                                        else Modifier
+                                    .background(
+                                        if (day.hasSession) AccentPrimary else Color(0x0Dffffff)
                                     )
                             )
                         }

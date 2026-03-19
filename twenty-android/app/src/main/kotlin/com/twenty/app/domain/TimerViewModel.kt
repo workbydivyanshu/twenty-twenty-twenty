@@ -12,8 +12,9 @@ import kotlinx.coroutines.launch
 
 class TimerViewModel : ViewModel() {
 
-    private var startTime: Long? = null
-    private var pausedTime: Long = 0
+    private var sessionStartTime: Long? = null
+    private var pausedElapsed: Long = 0
+    private var lastBreakTime: Long = 0
     private var tickJob: Job? = null
 
     private val _elapsed = MutableStateFlow(0L)
@@ -22,9 +23,7 @@ class TimerViewModel : ViewModel() {
     private val _isRunning = MutableStateFlow(false)
     val isRunning: StateFlow<Boolean> = _isRunning.asStateFlow()
 
-    private var lastBreakTime: Long = 0
     private var intervalJob: Job? = null
-    private var hiddenAt: Long? = null
 
     private val _nextBreakIn = MutableStateFlow<Int?>(null)
     val nextBreakIn: StateFlow<Int?> = _nextBreakIn.asStateFlow()
@@ -43,33 +42,33 @@ class TimerViewModel : ViewModel() {
 
     fun start() {
         if (_isRunning.value) return
-        startTime = System.currentTimeMillis() - pausedTime
+        sessionStartTime = System.currentTimeMillis() - pausedElapsed
+        lastBreakTime = sessionStartTime!!
         _isRunning.value = true
-
-        lastBreakTime = System.currentTimeMillis()
         startTick()
         startBreakInterval()
     }
 
     fun stop(): Long {
-        val elapsed = if (startTime != null) {
-            System.currentTimeMillis() - startTime!!
+        val currentElapsed = if (sessionStartTime != null) {
+            System.currentTimeMillis() - sessionStartTime!!
         } else {
-            pausedTime
+            pausedElapsed
         }
-        pausedTime = elapsed
+        pausedElapsed = currentElapsed
         _isRunning.value = false
         _nextBreakIn.value = null
         stopTick()
         stopBreakInterval()
-        return elapsed
+        return currentElapsed
     }
 
     fun reset() {
         stop()
         _elapsed.value = 0
-        pausedTime = 0
-        startTime = null
+        pausedElapsed = 0
+        sessionStartTime = null
+        lastBreakTime = 0
         _breakCountdown.value = 20
         _isBreakActive.value = false
     }
@@ -77,7 +76,7 @@ class TimerViewModel : ViewModel() {
     private fun startTick() {
         tickJob = viewModelScope.launch {
             while (isActive && _isRunning.value) {
-                startTime?.let {
+                sessionStartTime?.let {
                     _elapsed.value = System.currentTimeMillis() - it
                 }
                 delay(100)
@@ -93,14 +92,14 @@ class TimerViewModel : ViewModel() {
     private fun startBreakInterval() {
         intervalJob = viewModelScope.launch {
             while (isActive && _isRunning.value) {
-                val now = System.currentTimeMillis()
-                val since = now - lastBreakTime
-                val remaining = (BREAK_INTERVAL_MS - since) / 1000
+                val elapsedMs = sessionStartTime?.let { System.currentTimeMillis() - it } ?: 0L
+                val sinceLastBreak = elapsedMs - lastBreakTime
+                val remaining = BREAK_INTERVAL_MS - sinceLastBreak
 
                 if (remaining <= 0 && !_isBreakActive.value) {
                     triggerBreak()
-                } else {
-                    _nextBreakIn.value = remaining.toInt().coerceAtLeast(0)
+                } else if (!_isBreakActive.value) {
+                    _nextBreakIn.value = (remaining / 1000).toInt()
                 }
                 delay(500)
             }
@@ -126,27 +125,17 @@ class TimerViewModel : ViewModel() {
     }
 
     fun endBreak() {
+        sessionStartTime?.let {
+            lastBreakTime = System.currentTimeMillis() - it
+        }
         _isBreakActive.value = false
         _breakCountdown.value = 20
-        lastBreakTime = System.currentTimeMillis()
-        _nextBreakIn.value = null
     }
 
     fun onAppBackground() {
-        if (_isRunning.value && !_isBreakActive.value) {
-            hiddenAt = System.currentTimeMillis()
-            stopBreakInterval()
-        }
     }
 
     fun onAppForeground() {
-        hiddenAt?.let { hidden ->
-            lastBreakTime += System.currentTimeMillis() - hidden
-            hiddenAt = null
-        }
-        if (_isRunning.value && !_isBreakActive.value) {
-            startBreakInterval()
-        }
     }
 
     fun cleanup() {
