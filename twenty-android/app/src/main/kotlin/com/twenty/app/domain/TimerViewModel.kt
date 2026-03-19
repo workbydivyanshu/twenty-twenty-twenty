@@ -43,7 +43,6 @@ class TimerViewModel : ViewModel() {
     fun start() {
         if (_isRunning.value) return
         sessionStartTime = System.currentTimeMillis() - pausedElapsed
-        lastBreakTime = sessionStartTime!!
         _isRunning.value = true
         startTick()
         startBreakInterval()
@@ -75,7 +74,6 @@ class TimerViewModel : ViewModel() {
     fun resumeAfterBreak() {
         if (_isRunning.value) return
         sessionStartTime = System.currentTimeMillis() - pausedElapsed
-        lastBreakTime = sessionStartTime!!
         _isRunning.value = true
         startTick()
         startBreakInterval()

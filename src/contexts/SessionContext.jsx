@@ -1,9 +1,10 @@
-import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react';
+import { createContext, useContext, useState, useCallback, useRef } from 'react';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { useTimer } from '../hooks/useTimer';
 import { useBreakInterval } from '../hooks/useBreakInterval';
 import { useSessionStore } from '../hooks/useSessionStore';
 import { useSound } from '../hooks/useSound';
+import { useNotifications } from '../hooks/useNotifications';
 import { useAppSettings } from './SettingsContext';
 
 const SessionContext = createContext(null);
@@ -22,6 +23,7 @@ export function SessionProvider({ children, activeProfileId = 'default' }) {
   const [breakCountdown, setBreakCountdown] = useState(0);
 
   const sound = useSound();
+  const notifications = useNotifications(settings);
   const { elapsed, isRunning, start, startDebug, stop, pause, resumeAfterBreak, reset, getElapsed } = useTimer();
   const { saveSession } = useSessionStore(currentProfileId);
   const countdownRef = useRef(null);
@@ -32,9 +34,10 @@ export function SessionProvider({ children, activeProfileId = 'default' }) {
     pause();
     setBreaksTriggered(prev => prev + 1);
     setSessionState('break_pending');
+    notifications.triggerBreakNotification();
     if (settings.soundEnabled) sound.playBreakChime(volume);
     try { Haptics.impact({ style: ImpactStyle.Heavy }); } catch { /* ignore haptics */ }
-  }, [pause, sound, settings.soundEnabled, volume, getElapsed]);
+  }, [pause, sound, settings.soundEnabled, volume, getElapsed, notifications]);
 
   const { nextBreakIn } = useBreakInterval(getElapsed, isRunning, handleBreakTrigger);
 
