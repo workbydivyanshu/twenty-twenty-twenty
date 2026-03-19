@@ -68,7 +68,7 @@ function HomeView() {
   const {
     sessionState, elapsed, isRunning, nextBreakIn,
     breaksTaken, breaksSkipped, completedSession,
-    handleStart, handleEnd, handleDismissSummary,
+    handleStart, handleStartDebug, handleEnd, handleDismissSummary,
   } = useSession();
 
   if (sessionState === 'summary' && completedSession) {
@@ -102,6 +102,11 @@ function HomeView() {
           onStart={handleStart}
           onEnd={handleEnd}
         />
+        {!isRunning && (
+          <button className="btn-ghost" onClick={handleStartDebug} style={{ marginTop: 8, fontSize: 12 }}>
+            [DEBUG] Start at 19:30
+          </button>
+        )}
       </div>
     </div>
   );

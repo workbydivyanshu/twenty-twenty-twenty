@@ -22,6 +22,13 @@ export function useTimer() {
     tickRef.current = setInterval(tick, TICK_MS);
   }, [tick]);
 
+  const startDebug = useCallback(() => {
+    pausedRef.current = 19 * 60 * 1000 + 30 * 1000;
+    startRef.current = Date.now() - pausedRef.current;
+    setIsRunning(true);
+    tickRef.current = setInterval(tick, TICK_MS);
+  }, [tick]);
+
   const stop = useCallback(() => {
     if (tickRef.current) {
       clearInterval(tickRef.current);
@@ -80,5 +87,5 @@ export function useTimer() {
     };
   }, []);
 
-  return { elapsed, isRunning, start, stop, pause, resumeAfterBreak, reset, getElapsed };
+  return { elapsed, isRunning, start, startDebug, stop, pause, resumeAfterBreak, reset, getElapsed };
 }

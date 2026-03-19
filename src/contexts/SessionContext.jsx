@@ -22,7 +22,7 @@ export function SessionProvider({ children, activeProfileId = 'default' }) {
   const [breakCountdown, setBreakCountdown] = useState(0);
 
   const sound = useSound();
-  const { elapsed, isRunning, start, stop, pause, resumeAfterBreak, reset, getElapsed } = useTimer();
+  const { elapsed, isRunning, start, startDebug, stop, pause, resumeAfterBreak, reset, getElapsed } = useTimer();
   const { saveSession } = useSessionStore(currentProfileId);
   const countdownRef = useRef(null);
   const lastBreakElapsedRef = useRef(0);
@@ -76,6 +76,20 @@ export function SessionProvider({ children, activeProfileId = 'default' }) {
     if (settings.soundEnabled) sound.playStart(volume);
     try { await Haptics.impact({ style: ImpactStyle.Medium }); } catch { /* ignore haptics */ }
   }, [reset, start, sound, settings.soundEnabled, volume, activeProfileId]);
+
+  const handleStartDebug = useCallback(async () => {
+    setCurrentProfileId(activeProfileId);
+    reset();
+    setBreaksTaken(0);
+    setBreaksSkipped(0);
+    setBreaksTriggered(0);
+    setCompletedSession(null);
+    setBreakCountdown(0);
+    const now = Date.now();
+    setSessionStartTime(now);
+    setSessionState('active');
+    startDebug();
+  }, [reset, startDebug, activeProfileId]);
 
   const handleEnd = useCallback(async () => {
     const finalElapsed = stop();
@@ -142,6 +156,7 @@ export function SessionProvider({ children, activeProfileId = 'default' }) {
     completedSession,
     currentProfileId,
     handleStart,
+    handleStartDebug,
     handleEnd,
     handleBreakTake,
     handleBreakSkipSession,
