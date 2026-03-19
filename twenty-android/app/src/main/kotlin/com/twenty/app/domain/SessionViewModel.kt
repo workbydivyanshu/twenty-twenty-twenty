@@ -3,7 +3,6 @@ package com.twenty.app.domain
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.twenty.app.data.Session
-import com.twenty.app.data.Settings
 import com.twenty.app.data.Storage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -41,7 +40,6 @@ class SessionViewModel(
         timerViewModel.setBreakTriggerListener {
             _breaksTriggered.value = _breaksTriggered.value + 1
             _sessionState.value = "break"
-            onStartSession?.invoke()
         }
     }
 
@@ -66,7 +64,7 @@ class SessionViewModel(
         sessionStartTime = System.currentTimeMillis()
         _sessionState.value = "active"
         timerViewModel.start()
-        onEndSession?.invoke()
+        onStartSession?.invoke()
     }
 
     fun handleEnd(sessions: List<Session>, onSave: (List<Session>) -> Unit) {
@@ -91,7 +89,6 @@ class SessionViewModel(
         val updated = listOf(session) + sessions
         onSave(updated)
         _sessionState.value = "summary"
-        onStartSession?.invoke()
     }
 
     fun handleBreakConfirm() {

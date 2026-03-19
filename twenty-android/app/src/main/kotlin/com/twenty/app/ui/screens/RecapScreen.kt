@@ -1,7 +1,6 @@
 package com.twenty.app.ui.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,7 +18,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -35,7 +33,6 @@ import androidx.compose.ui.unit.dp
 import com.twenty.app.data.Session
 import com.twenty.app.domain.BestDay
 import com.twenty.app.domain.CalendarDay
-import com.twenty.app.domain.SessionStats
 import com.twenty.app.domain.computeStats
 import com.twenty.app.domain.formatDurationLong
 import com.twenty.app.domain.getBestDayOfWeek
@@ -44,9 +41,6 @@ import com.twenty.app.domain.getWeekStart
 import com.twenty.app.domain.getMonthStart
 import com.twenty.app.ui.components.GlassCard
 import com.twenty.app.ui.theme.AccentPrimary
-import com.twenty.app.ui.theme.AccentSecondary
-import com.twenty.app.ui.theme.BorderMedium
-import com.twenty.app.ui.theme.Danger
 import com.twenty.app.ui.theme.GlassBackground
 import com.twenty.app.ui.theme.Success
 import com.twenty.app.ui.theme.TextMuted

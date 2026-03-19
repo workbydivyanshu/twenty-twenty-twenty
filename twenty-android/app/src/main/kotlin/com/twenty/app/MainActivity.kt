@@ -31,12 +31,9 @@ import com.twenty.app.platform.SoundManager
 import com.twenty.app.platform.TimerForegroundService
 import com.twenty.app.ui.TwentyApp
 import com.twenty.app.ui.theme.TwentyTheme
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
@@ -51,9 +48,6 @@ class MainActivity : ComponentActivity() {
 
     private var notificationUpdateJob: Job? = null
 
-    private val _notificationBreakActive = MutableStateFlow(false)
-    private val _notificationBreakCountdown = MutableStateFlow(20)
-
     private val notificationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             when (intent?.action) {
@@ -67,9 +61,19 @@ class MainActivity : ComponentActivity() {
                 }
                 NotificationHelper.ACTION_BREAK_CONFIRM -> {
                     sessionViewModel.handleBreakConfirm()
+                    lifecycleScope.launch {
+                        val s = storage.settingsFlow.first()
+                        if (s.soundEnabled) soundManager.playConfirm(s.volume)
+                    }
+                    hapticFeedback.light()
                 }
                 NotificationHelper.ACTION_BREAK_SKIP -> {
                     sessionViewModel.handleBreakSkip()
+                    lifecycleScope.launch {
+                        val s = storage.settingsFlow.first()
+                        if (s.soundEnabled) soundManager.playSkip(s.volume)
+                    }
+                    hapticFeedback.light()
                 }
             }
         }
@@ -103,11 +107,6 @@ class MainActivity : ComponentActivity() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-        }
-
-        timerViewModel.setBreakTriggerListener {
-            _notificationBreakActive.value = true
-            _notificationBreakCountdown.value = 20
         }
 
         setContent {
@@ -210,22 +209,26 @@ class MainActivity : ComponentActivity() {
                 val elapsed = timerViewModel.elapsed.value
                 val currentBreakActive = timerViewModel.isBreakActive.value
                 val currentBreakCountdown = timerViewModel.breakCountdown.value
+                val isRunning = timerViewModel.isRunning.value
 
                 val title = when {
-                    currentBreakActive -> "Break Time!"
+                    currentBreakActive && currentBreakCountdown > 0 -> "Break Time!"
+                    currentBreakActive -> "Break Complete!"
                     else -> "Twenty ·³"
                 }
 
                 val content = when {
-                    currentBreakActive -> "Look away for $currentBreakCountdown sec"
+                    currentBreakActive && currentBreakCountdown > 0 -> "Look away · ${currentBreakCountdown}s remaining"
+                    currentBreakActive -> "Did you rest your eyes?"
                     else -> formatDuration(elapsed)
                 }
 
                 val notification = notificationHelper.buildNotification(
                     title = title,
                     content = content,
-                    isBreakActive = currentBreakActive,
-                    isSessionActive = !currentBreakActive
+                    isBreakActive = currentBreakActive && currentBreakCountdown > 0,
+                    isSessionActive = !currentBreakActive && isRunning,
+                    isBreakConfirmPending = currentBreakActive && currentBreakCountdown == 0
                 )
                 notificationHelper.showNotification(notification)
 
