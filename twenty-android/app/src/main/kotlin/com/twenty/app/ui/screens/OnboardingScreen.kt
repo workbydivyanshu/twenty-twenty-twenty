@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,7 +40,6 @@ import com.twenty.app.ui.theme.AccentPrimary
 import com.twenty.app.ui.theme.AccentSecondary
 import com.twenty.app.ui.theme.BgBase
 import com.twenty.app.ui.theme.GlassBackground
-import com.twenty.app.ui.theme.Success
 import com.twenty.app.ui.theme.TextMuted
 import com.twenty.app.ui.theme.TextPrimary
 import com.twenty.app.ui.theme.TextSecondary
@@ -168,7 +166,7 @@ fun StepTwo(onNext: () -> Unit, onSkip: () -> Unit) {
         Spacer(Modifier.height(16.dp))
 
         Text(
-            text = "Enable notifications to get gentle reminders when it's time to take a break. We promise not to打扰 you too often!",
+            text = "Enable notifications to get gentle reminders when it's time to take a break. We promise not to disturb you too often!",
             style = MaterialTheme.typography.bodyMedium,
             color = TextSecondary,
             textAlign = TextAlign.Center

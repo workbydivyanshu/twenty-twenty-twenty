@@ -19,13 +19,18 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -44,8 +49,13 @@ import com.twenty.app.ui.theme.Warning
 fun BreakOverlayScreen(
     countdown: Int,
     onConfirm: () -> Unit,
-    onSkip: () -> Unit
+    onSkip: () -> Unit,
+    onEndSession: () -> Unit
 ) {
+    var showEndSessionDialog by remember { mutableStateOf(false) }
+    
+    val isCountdownActive = countdown > 0
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -56,59 +66,110 @@ fun BreakOverlayScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            com.twenty.app.ui.components.CircularProgressTimer(
-                progress = countdown / 20f,
-                countdown = countdown
-            )
+            if (isCountdownActive) {
+                com.twenty.app.ui.components.CircularProgressTimer(
+                    progress = countdown / 20f,
+                    countdown = countdown
+                )
 
-            Spacer(Modifier.height(32.dp))
+                Spacer(Modifier.height(32.dp))
 
-            Text(
-                text = "Look at something",
-                style = MaterialTheme.typography.headlineLarge,
-                color = TextPrimary
-            )
-            Text(
-                text = "20 feet away",
-                style = MaterialTheme.typography.headlineLarge,
-                color = AccentPrimary
-            )
-            Text(
-                text = "for 20 seconds",
-                style = MaterialTheme.typography.headlineLarge,
-                color = TextPrimary
-            )
+                Text(
+                    text = "Look at something",
+                    style = MaterialTheme.typography.headlineLarge,
+                    color = TextPrimary
+                )
+                Text(
+                    text = "20 feet away",
+                    style = MaterialTheme.typography.headlineLarge,
+                    color = AccentPrimary
+                )
+                Text(
+                    text = "for 20 seconds",
+                    style = MaterialTheme.typography.headlineLarge,
+                    color = TextPrimary
+                )
 
-            Spacer(Modifier.height(12.dp))
+                Spacer(Modifier.height(12.dp))
 
-            Text(
-                text = "Rest your eyes · Follow the 20-20-20 rule",
-                style = MaterialTheme.typography.bodyMedium,
-                color = TextMuted
-            )
+                Text(
+                    text = "Rest your eyes · Follow the 20-20-20 rule",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = TextMuted
+                )
+            } else {
+                Text(
+                    text = "Did you rest your eyes?",
+                    style = MaterialTheme.typography.headlineMedium,
+                    color = TextPrimary
+                )
 
-            Spacer(Modifier.height(48.dp))
+                Spacer(Modifier.height(8.dp))
 
-            Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                OutlinedButton(
-                    onClick = onSkip,
-                    modifier = Modifier.height(52.dp),
-                    shape = RoundedCornerShape(14.dp),
-                    colors = ButtonDefaults.outlinedButtonColors(contentColor = TextSecondary)
-                ) {
-                    Text("Skip")
-                }
+                Text(
+                    text = "Looked at something 20 feet away for 20 seconds",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = TextMuted
+                )
 
-                Button(
-                    onClick = onConfirm,
-                    modifier = Modifier.height(52.dp),
-                    shape = RoundedCornerShape(14.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Success)
-                ) {
-                    Text("I rested my eyes ✓", color = BgBase)
+                Spacer(Modifier.height(48.dp))
+
+                Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                    OutlinedButton(
+                        onClick = { showEndSessionDialog = true },
+                        modifier = Modifier.height(52.dp),
+                        shape = RoundedCornerShape(14.dp),
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = TextSecondary)
+                    ) {
+                        Text("No, I didn't")
+                    }
+
+                    Button(
+                        onClick = onConfirm,
+                        modifier = Modifier.height(52.dp),
+                        shape = RoundedCornerShape(14.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Success)
+                    ) {
+                        Text("Yes, I did ✓", color = BgBase)
+                    }
                 }
             }
         }
+    }
+
+    if (showEndSessionDialog) {
+        AlertDialog(
+            onDismissRequest = { showEndSessionDialog = false },
+            containerColor = GlassBackground,
+            title = { Text("End session?", color = TextPrimary) },
+            text = { 
+                Text(
+                    "Your break will be counted as skipped.",
+                    color = TextSecondary
+                )
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        showEndSessionDialog = false
+                        onEndSession()
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = Danger)
+                ) {
+                    Text("End Session")
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showEndSessionDialog = false
+                        onSkip()
+                    }
+                ) {
+                    Text("Continue anyway", color = TextSecondary)
+                }
+            }
+        )
     }
 }
 
@@ -165,11 +226,6 @@ fun BreakStats(taken: Int, skipped: Int) {
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = "👁",
-                style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(end = 4.dp)
-            )
-            Text(
                 text = taken.toString(),
                 style = MaterialTheme.typography.titleLarge,
                 color = Success
@@ -184,12 +240,6 @@ fun BreakStats(taken: Int, skipped: Int) {
         Spacer(Modifier.width(24.dp))
 
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(
-                text = "—",
-                style = MaterialTheme.typography.titleLarge,
-                color = TextMuted,
-                modifier = Modifier.padding(end = 4.dp)
-            )
             Text(
                 text = skipped.toString(),
                 style = MaterialTheme.typography.titleLarge,

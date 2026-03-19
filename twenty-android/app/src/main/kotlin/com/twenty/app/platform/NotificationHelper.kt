@@ -9,7 +9,6 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.twenty.app.MainActivity
-import com.twenty.app.R
 
 class NotificationHelper(private val context: Context) {
 
@@ -46,7 +45,8 @@ class NotificationHelper(private val context: Context) {
         title: String,
         content: String,
         isBreakActive: Boolean = false,
-        isSessionActive: Boolean = false
+        isSessionActive: Boolean = false,
+        isBreakConfirmPending: Boolean = false
     ): Notification {
         val pendingIntentFlags = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
 
@@ -67,23 +67,33 @@ class NotificationHelper(private val context: Context) {
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setCategory(NotificationCompat.CATEGORY_PROGRESS)
 
-        if (isBreakActive) {
-            builder.addAction(
-                android.R.drawable.ic_menu_view,
-                "Take Break",
-                createActionPendingIntent(ACTION_BREAK_CONFIRM)
-            )
-            builder.addAction(
-                android.R.drawable.ic_menu_close_clear_cancel,
-                "Skip",
-                createActionPendingIntent(ACTION_BREAK_SKIP)
-            )
-        } else if (isSessionActive) {
-            builder.addAction(
-                android.R.drawable.ic_menu_close_clear_cancel,
-                "Stop",
-                createActionPendingIntent(ACTION_STOP)
-            )
+        when {
+            isBreakConfirmPending -> {
+                builder.addAction(
+                    android.R.drawable.ic_menu_view,
+                    "Yes, I did",
+                    createActionPendingIntent(ACTION_BREAK_CONFIRM)
+                )
+                builder.addAction(
+                    android.R.drawable.ic_menu_close_clear_cancel,
+                    "No, I didn't",
+                    createActionPendingIntent(ACTION_BREAK_SKIP)
+                )
+            }
+            isBreakActive -> {
+                builder.addAction(
+                    android.R.drawable.ic_menu_view,
+                    "View",
+                    createActionPendingIntent(ACTION_BREAK_CONFIRM)
+                )
+            }
+            isSessionActive -> {
+                builder.addAction(
+                    android.R.drawable.ic_menu_close_clear_cancel,
+                    "Stop",
+                    createActionPendingIntent(ACTION_STOP)
+                )
+            }
         }
 
         return builder.build()

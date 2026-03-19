@@ -103,7 +103,8 @@ fun TwentyApp(
                     isBreakActive -> BreakOverlayScreen(
                         countdown = breakCountdown,
                         onConfirm = { sessionViewModel.handleBreakConfirm() },
-                        onSkip = { sessionViewModel.handleBreakSkip() }
+                        onSkip = { sessionViewModel.handleBreakSkip() },
+                        onEndSession = { sessionViewModel.handleEnd(sessions, onSaveSessions) }
                     )
 
                     completedSession != null -> SessionSummaryScreen(
