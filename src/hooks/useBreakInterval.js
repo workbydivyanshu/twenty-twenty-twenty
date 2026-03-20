@@ -2,56 +2,59 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { BREAK_INTERVAL_MS } from '../utils/constants';
 
-export function useBreakInterval(getElapsed, isRunning, onTrigger) {
-  const [nextBreakIn, setNextBreakIn] = useState(null);
-  const intervalRef = useRef(null);
-  const lastTriggeredPeriodRef = useRef(0);
-  const onTriggerRef = useRef(onTrigger);
+export function useBreakInterval(getElapsed, isRunning, onTrigger)
+{
+	const [nextBreakIn, setNextBreakIn] = useState(null);
+	const intervalRef = useRef(null);
+	const lastTriggeredPeriodRef = useRef(0);
+	const onTriggerRef = useRef(onTrigger);
 
-  useEffect(() => {
-    onTriggerRef.current = onTrigger;
-  }, [onTrigger]);
+	useEffect(() => {
+		onTriggerRef.current = onTrigger;
+	}, [onTrigger]);
 
-  const clearInterval = useCallback(() => {
-    if (intervalRef.current) {
-      window.clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-  }, []);
+	const clear_interval = useCallback(() => {
+		if (intervalRef.current) {
+			window.clearInterval(intervalRef.current);
+			intervalRef.current = null;
+		}
+	}, []);
 
-  useEffect(() => {
-    if (!isRunning) {
-      clearInterval();
-      setNextBreakIn(null);
-      return;
-    }
+	useEffect(() => {
+		if (!isRunning) {
+			clear_interval();
+			setNextBreakIn(null);
+			return;
+		}
 
-    lastTriggeredPeriodRef.current = Math.floor(getElapsed() / BREAK_INTERVAL_MS);
+		lastTriggeredPeriodRef.current = Math.floor(getElapsed() / BREAK_INTERVAL_MS);
 
-    const tick = () => {
-      const elapsedMs = getElapsed();
-      const currentPeriod = Math.floor(elapsedMs / BREAK_INTERVAL_MS);
+		const tick = () => {
+			const elapsed_ms = getElapsed();
+			const current_period = Math.floor(elapsed_ms / BREAK_INTERVAL_MS);
 
-      if (currentPeriod > lastTriggeredPeriodRef.current) {
-        lastTriggeredPeriodRef.current = currentPeriod;
-        clearInterval();
-        setNextBreakIn(0);
-        if (onTriggerRef.current) onTriggerRef.current();
-      } else {
-        const remaining = BREAK_INTERVAL_MS - (elapsedMs % BREAK_INTERVAL_MS);
-        setNextBreakIn(Math.ceil(remaining / 1000));
-      }
-    };
+			if (current_period > lastTriggeredPeriodRef.current) {
+				lastTriggeredPeriodRef.current = current_period;
+				clear_interval();
+				setNextBreakIn(0);
+				if (onTriggerRef.current) {
+					onTriggerRef.current();
+				}
+			} else {
+				const remaining = BREAK_INTERVAL_MS - (elapsed_ms % BREAK_INTERVAL_MS);
+				setNextBreakIn(Math.ceil(remaining / 1000));
+			}
+		};
 
-    intervalRef.current = window.setInterval(tick, 500);
-    tick();
+		intervalRef.current = window.setInterval(tick, 500);
+		tick();
 
-    return () => {
-      clearInterval();
-    };
-  }, [isRunning, getElapsed, clearInterval]);
+		return () => {
+			clear_interval();
+		};
+	}, [isRunning, getElapsed, clear_interval]);
 
-  return {
-    nextBreakIn,
-  };
+	return {
+		nextBreakIn,
+	};
 }

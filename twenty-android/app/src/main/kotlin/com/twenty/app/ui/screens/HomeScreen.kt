@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import com.twenty.app.ui.theme.AccentPrimary
 import com.twenty.app.ui.theme.AccentSecondary
 import com.twenty.app.ui.theme.BgBase
+import com.twenty.app.ui.theme.BgCard
 import com.twenty.app.ui.theme.Danger
 import com.twenty.app.ui.theme.GlassBackground
 import com.twenty.app.ui.theme.Success
@@ -47,257 +48,272 @@ import com.twenty.app.ui.theme.Warning
 
 @Composable
 fun BreakOverlayScreen(
-    sessionState: String,
-    countdown: Int,
-    onTakeBreak: () -> Unit,
-    onSkipSession: () -> Unit,
-    onConfirm: () -> Unit,
-    onSkip: () -> Unit,
-    onEndSession: () -> Unit
-) {
-    var showEndSessionDialog by remember { mutableStateOf(false) }
-    val isPending = sessionState == "break_pending"
-    val isCountdownActive = sessionState == "break_active" && countdown > 0
-    val showConfirmPrompt = sessionState == "break_active" && countdown == 0
+	sessionState: String,
+	countdown: Int,
+	onTakeBreak: () -> Unit,
+	onSkipSession: () -> Unit,
+	onConfirm: () -> Unit,
+	onSkip: () -> Unit,
+	onEndSession: () -> Unit
+)
+{
+	var showEndSessionDialog by remember { mutableStateOf(false) }
+	val isPending = sessionState == "break_pending"
+	val isCountdownActive = sessionState == "break_active" && countdown > 0
+	val showConfirmPrompt = sessionState == "break_active" && countdown == 0
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(BgBase.copy(alpha = 0.95f)),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            when {
-                isPending -> {
-                    Text(
-                        text = "Time for a break!",
-                        style = MaterialTheme.typography.headlineMedium,
-                        color = TextPrimary
-                    )
+	Box(
+		modifier = Modifier
+			.fillMaxSize()
+			.background(BgBase.copy(alpha = 0.95f)),
+		contentAlignment = Alignment.Center
+	)
+{
+		Column(
+			horizontalAlignment = Alignment.CenterHorizontally,
+			verticalArrangement = Arrangement.Center
+		)
+{
+			when {
+				isPending -> {
+					Text(
+						text = "Time for a break!",
+						style = MaterialTheme.typography.headlineMedium,
+						color = TextPrimary
+					)
 
-                    Spacer(Modifier.height(8.dp))
+					Spacer(Modifier.height(8.dp))
 
-                    Text(
-                        text = "20 minutes of screen time.\nTake a moment to rest your eyes.",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = TextMuted,
-                        modifier = Modifier.padding(horizontal = 32.dp)
-                    )
+					Text(
+						text = "20 minutes of screen time.\nTake a moment to rest your eyes.",
+						style = MaterialTheme.typography.bodyMedium,
+						color = TextMuted,
+						modifier = Modifier.padding(horizontal = 32.dp)
+					)
 
-                    Spacer(Modifier.height(48.dp))
+					Spacer(Modifier.height(48.dp))
 
-                    Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                        OutlinedButton(
-                            onClick = onSkipSession,
-                            modifier = Modifier.height(52.dp),
-                            shape = RoundedCornerShape(14.dp),
-                            colors = ButtonDefaults.outlinedButtonColors(contentColor = TextSecondary)
-                        ) {
-                            Text("Skip Session")
-                        }
+					Row(horizontalArrangement = Arrangement.spacedBy(16.dp))
+{
+						OutlinedButton(
+							onClick = onSkipSession,
+							modifier = Modifier.height(52.dp),
+							shape = RoundedCornerShape(14.dp),
+							colors = ButtonDefaults.outlinedButtonColors(contentColor = TextSecondary)
+						)
+{
+							Text("Skip Session")
+						}
 
-                        Button(
-                            onClick = onTakeBreak,
-                            modifier = Modifier.height(52.dp),
-                            shape = RoundedCornerShape(14.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = AccentPrimary)
-                        ) {
-                            Text("Take Break", color = BgBase)
-                        }
-                    }
-                }
+						Button(
+							onClick = onTakeBreak,
+							modifier = Modifier.height(52.dp),
+							shape = RoundedCornerShape(14.dp),
+							colors = ButtonDefaults.buttonColors(containerColor = AccentPrimary)
+						)
+{
+							Text("Take Break", color = BgBase)
+						}
+					}
+				}
 
-                isCountdownActive -> {
-                    com.twenty.app.ui.components.CircularProgressTimer(
-                        progress = countdown / 20f,
-                        countdown = countdown
-                    )
+				isCountdownActive -> {
+					com.twenty.app.ui.components.CircularProgressTimer(
+						progress = countdown / 20f,
+						countdown = countdown
+					)
 
-                    Spacer(Modifier.height(32.dp))
+					Spacer(Modifier.height(32.dp))
 
-                    Text(
-                        text = "Rest your eyes",
-                        style = MaterialTheme.typography.headlineLarge,
-                        color = TextPrimary
-                    )
-                    Text(
-                        text = "20 feet away",
-                        style = MaterialTheme.typography.headlineLarge,
-                        color = AccentPrimary
-                    )
-                    Text(
-                        text = "for 20 seconds",
-                        style = MaterialTheme.typography.headlineLarge,
-                        color = TextPrimary
-                    )
+					Text(
+						text = "Rest your eyes",
+						style = MaterialTheme.typography.headlineLarge,
+						color = TextPrimary
+					)
+					Text(
+						text = "20 feet away · 20 seconds",
+						style = MaterialTheme.typography.bodyLarge,
+						color = TextSecondary
+					)
 
-                    Spacer(Modifier.height(12.dp))
+					Spacer(Modifier.height(12.dp))
 
-                    Text(
-                        text = "Look away from your screen",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = TextMuted
-                    )
-                }
+					Text(
+						text = "Look away from your screen",
+						style = MaterialTheme.typography.bodyMedium,
+						color = TextMuted
+					)
+				}
 
-                showConfirmPrompt -> {
-                    Text(
-                        text = "Did you rest your eyes?",
-                        style = MaterialTheme.typography.headlineMedium,
-                        color = TextPrimary
-                    )
+				showConfirmPrompt -> {
+					Text(
+						text = "Did you rest your eyes?",
+						style = MaterialTheme.typography.headlineMedium,
+						color = TextPrimary
+					)
 
-                    Spacer(Modifier.height(8.dp))
+					Spacer(Modifier.height(8.dp))
 
-                    Text(
-                        text = "Looked at something 20 feet away for 20 seconds",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = TextMuted
-                    )
+					Text(
+						text = "Looked at something 20 feet away for 20 seconds",
+						style = MaterialTheme.typography.bodyMedium,
+						color = TextMuted
+					)
 
-                    Spacer(Modifier.height(48.dp))
+					Spacer(Modifier.height(48.dp))
 
-                    Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                        OutlinedButton(
-                            onClick = { showEndSessionDialog = true },
-                            modifier = Modifier.height(52.dp),
-                            shape = RoundedCornerShape(14.dp),
-                            colors = ButtonDefaults.outlinedButtonColors(contentColor = TextSecondary)
-                        ) {
-                            Text("No, I didn't")
-                        }
+					Row(horizontalArrangement = Arrangement.spacedBy(16.dp))
+{
+						Button(
+							onClick = { showEndSessionDialog = true },
+							modifier = Modifier.height(52.dp),
+							shape = RoundedCornerShape(14.dp),
+							colors = ButtonDefaults.buttonColors(containerColor = Danger)
+						)
+{
+							Text("No, I didn't", color = TextPrimary)
+						}
 
-                        Button(
-                            onClick = onConfirm,
-                            modifier = Modifier.height(52.dp),
-                            shape = RoundedCornerShape(14.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = Success)
-                        ) {
-                            Text("Yes, I did ✓", color = BgBase)
-                        }
-                    }
-                }
-            }
-        }
-    }
+						Button(
+							onClick = onConfirm,
+							modifier = Modifier.height(52.dp),
+							shape = RoundedCornerShape(14.dp),
+							colors = ButtonDefaults.buttonColors(containerColor = Success)
+						)
+{
+							Text("Yes, I did", color = BgBase)
+						}
+					}
+				}
+			}
+		}
+	}
 
-    if (showEndSessionDialog) {
-        AlertDialog(
-            onDismissRequest = { showEndSessionDialog = false },
-            containerColor = GlassBackground,
-            title = { Text("End session?", color = TextPrimary) },
-            text = {
-                Text(
-                    "Your break will be counted as skipped.",
-                    color = TextSecondary
-                )
-            },
-            confirmButton = {
-                Button(
-                    onClick = {
-                        showEndSessionDialog = false
-                        onEndSession()
-                    },
-                    colors = ButtonDefaults.buttonColors(containerColor = Danger)
-                ) {
-                    Text("End Session")
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        showEndSessionDialog = false
-                        onSkip()
-                    }
-                ) {
-                    Text("Continue anyway", color = TextSecondary)
-                }
-            }
-        )
-    }
+	if (showEndSessionDialog)
+{
+		AlertDialog(
+			onDismissRequest = { showEndSessionDialog = false },
+			containerColor = BgCard,
+			title = { Text("End session?", color = TextPrimary) },
+			text = {
+				Text(
+					"Your break will be counted as skipped.",
+					color = TextSecondary
+				)
+			},
+			confirmButton = {
+				Button(
+					onClick = {
+						showEndSessionDialog = false
+						onEndSession()
+					},
+					colors = ButtonDefaults.buttonColors(containerColor = Danger)
+				)
+{
+					Text("End Session")
+				}
+			},
+			dismissButton = {
+				TextButton(
+					onClick = {
+						showEndSessionDialog = false
+						onSkip()
+					}
+				)
+{
+					Text("Continue anyway", color = TextSecondary)
+				}
+			}
+		)
+	}
 }
 
 @Composable
-fun SessionBadge(state: String) {
-    val (text, color) = when (state) {
-        "active" -> "Active Session" to AccentPrimary
-        "break_pending" -> "Break Time" to Warning
-        "break_active" -> "Taking a Break" to Warning
-        "summary" -> "Session Complete" to Success
-        else -> "Ready" to TextMuted
-    }
+fun SessionBadge(state: String)
+{
+	val (text, color) = when (state)
+{
+		"active" -> "Active Session" to AccentPrimary
+		"break_pending" -> "Break Time" to Warning
+		"break_active" -> "Taking a Break" to Warning
+		"summary" -> "Session Complete" to Success
+		else -> "Ready" to TextMuted
+	}
 
-    val infiniteTransition = rememberInfiniteTransition(label = "pulse")
-    val pulseAlpha by infiniteTransition.animateFloat(
-        initialValue = 1f,
-        targetValue = 0.3f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(700),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = "pulse"
-    )
+	val infiniteTransition = rememberInfiniteTransition(label = "pulse")
+	val pulseAlpha by infiniteTransition.animateFloat(
+		initialValue = 1f,
+		targetValue = 0.3f,
+		animationSpec = infiniteRepeatable(
+			animation = tween(700),
+			repeatMode = RepeatMode.Reverse
+		),
+		label = "pulse"
+	)
 
-    Row(
-        modifier = Modifier
-            .background(GlassBackground, RoundedCornerShape(999.dp))
-            .padding(horizontal = 12.dp, vertical = 6.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        if (state == "active" || state == "break_pending" || state == "break_active") {
-            Box(
-                modifier = Modifier
-                    .size(6.dp)
-                    .background(color.copy(alpha = pulseAlpha), CircleShape)
-            )
-            Spacer(Modifier.width(6.dp))
-        }
-        Text(
-            text = text,
-            style = MaterialTheme.typography.bodyMedium,
-            color = color
-        )
-    }
+	Row(
+		modifier = Modifier
+			.background(GlassBackground, RoundedCornerShape(999.dp))
+			.padding(horizontal = 12.dp, vertical = 6.dp),
+		verticalAlignment = Alignment.CenterVertically
+	)
+{
+		if (state == "active" || state == "break_pending" || state == "break_active")
+{
+			Box(
+				modifier = Modifier
+					.size(6.dp)
+					.background(color.copy(alpha = pulseAlpha), CircleShape)
+			)
+			Spacer(Modifier.width(6.dp))
+		}
+		Text(
+			text = text,
+			style = MaterialTheme.typography.bodyMedium,
+			color = color
+		)
+	}
 }
 
 @Composable
-fun BreakStats(taken: Int, skipped: Int) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(
-                text = taken.toString(),
-                style = MaterialTheme.typography.titleLarge,
-                color = Success
-            )
-            Text(
-                text = " taken",
-                style = MaterialTheme.typography.bodyMedium,
-                color = TextSecondary
-            )
-        }
+fun BreakStats(taken: Int, skipped: Int)
+{
+	Row(
+		modifier = Modifier
+			.fillMaxWidth()
+			.padding(horizontal = 16.dp),
+		horizontalArrangement = Arrangement.Center,
+		verticalAlignment = Alignment.CenterVertically
+	)
+{
+		Row(verticalAlignment = Alignment.CenterVertically)
+{
+			Text(
+				text = taken.toString(),
+				style = MaterialTheme.typography.titleLarge,
+				color = Success
+			)
+			Text(
+				text = " taken",
+				style = MaterialTheme.typography.bodyMedium,
+				color = TextSecondary
+			)
+		}
 
-        Spacer(Modifier.width(24.dp))
+		Spacer(Modifier.width(24.dp))
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(
-                text = skipped.toString(),
-                style = MaterialTheme.typography.titleLarge,
-                color = TextMuted
-            )
-            Text(
-                text = " skipped",
-                style = MaterialTheme.typography.bodyMedium,
-                color = TextSecondary
-            )
-        }
-    }
+		Row(verticalAlignment = Alignment.CenterVertically)
+{
+			Text(
+				text = skipped.toString(),
+				style = MaterialTheme.typography.titleLarge,
+				color = TextMuted
+			)
+			Text(
+				text = " skipped",
+				style = MaterialTheme.typography.bodyMedium,
+				color = TextSecondary
+			)
+		}
+	}
 }
