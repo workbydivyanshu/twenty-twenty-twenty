@@ -49,7 +49,7 @@ class TimerViewModel : ViewModel() {
     }
 
     fun stop(): Long {
-        val currentElapsed = if (sessionStartTime != null) {
+        val currentElapsed = if (_isRunning.value && sessionStartTime != null) {
             System.currentTimeMillis() - sessionStartTime!!
         } else {
             pausedElapsed
@@ -142,7 +142,7 @@ class TimerViewModel : ViewModel() {
     fun endBreakCountdown() {
         _isBreakActive.value = false
         _breakCountdown.value = 0
-        lastBreakTime = sessionStartTime?.let { System.currentTimeMillis() - it } ?: 0L
+        lastBreakTime = pausedElapsed
     }
 
     fun onAppBackground() {

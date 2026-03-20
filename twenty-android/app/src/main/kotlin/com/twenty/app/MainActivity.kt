@@ -61,19 +61,9 @@ class MainActivity : ComponentActivity() {
                 }
                 NotificationHelper.ACTION_BREAK_CONFIRM -> {
                     sessionViewModel.handleBreakConfirm()
-                    lifecycleScope.launch {
-                        val s = storage.settingsFlow.first()
-                        if (s.soundEnabled) soundManager.playConfirm(s.volume)
-                    }
-                    hapticFeedback.light()
                 }
                 NotificationHelper.ACTION_BREAK_SKIP -> {
                     sessionViewModel.handleBreakSkip()
-                    lifecycleScope.launch {
-                        val s = storage.settingsFlow.first()
-                        if (s.soundEnabled) soundManager.playSkip(s.volume)
-                    }
-                    hapticFeedback.light()
                 }
                 NotificationHelper.ACTION_BREAK_TAKE -> {
                     sessionViewModel.handleBreakTake()
@@ -153,7 +143,8 @@ class MainActivity : ComponentActivity() {
                     onStart = { if (settings.soundEnabled) soundManager.playStart(settings.volume) },
                     onEnd = { if (settings.soundEnabled) soundManager.playEnd(settings.volume); hapticFeedback.heavy() },
                     onConfirm = { if (settings.soundEnabled) soundManager.playConfirm(settings.volume); hapticFeedback.light() },
-                    onSkip = { if (settings.soundEnabled) soundManager.playSkip(settings.volume); hapticFeedback.light() }
+                    onSkip = { if (settings.soundEnabled) soundManager.playSkip(settings.volume); hapticFeedback.light() },
+                    onTrigger = { if (settings.soundEnabled) soundManager.playBreakChime(settings.volume); hapticFeedback.heavy() }
                 )
             }
 

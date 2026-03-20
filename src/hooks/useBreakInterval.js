@@ -5,6 +5,12 @@ import { BREAK_INTERVAL_MS } from '../utils/constants';
 export function useBreakInterval(getElapsed, isRunning, onTrigger) {
   const [nextBreakIn, setNextBreakIn] = useState(null);
   const intervalRef = useRef(null);
+  const lastTriggeredPeriodRef = useRef(0);
+  const onTriggerRef = useRef(onTrigger);
+
+  useEffect(() => {
+    onTriggerRef.current = onTrigger;
+  }, [onTrigger]);
 
   const clearInterval = useCallback(() => {
     if (intervalRef.current) {
@@ -12,8 +18,6 @@ export function useBreakInterval(getElapsed, isRunning, onTrigger) {
       intervalRef.current = null;
     }
   }, []);
-
-  const lastTriggeredPeriodRef = useRef(0);
 
   useEffect(() => {
     if (!isRunning) {
@@ -32,7 +36,7 @@ export function useBreakInterval(getElapsed, isRunning, onTrigger) {
         lastTriggeredPeriodRef.current = currentPeriod;
         clearInterval();
         setNextBreakIn(0);
-        if (onTrigger) onTrigger();
+        if (onTriggerRef.current) onTriggerRef.current();
       } else {
         const remaining = BREAK_INTERVAL_MS - (elapsedMs % BREAK_INTERVAL_MS);
         setNextBreakIn(Math.ceil(remaining / 1000));
@@ -45,7 +49,7 @@ export function useBreakInterval(getElapsed, isRunning, onTrigger) {
     return () => {
       clearInterval();
     };
-  }, [isRunning, getElapsed, onTrigger, clearInterval]);
+  }, [isRunning, getElapsed, clearInterval]);
 
   return {
     nextBreakIn,

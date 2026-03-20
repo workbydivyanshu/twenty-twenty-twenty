@@ -37,6 +37,7 @@ class SessionViewModel(
     private var onEndSession: (() -> Unit)? = null
     private var onBreakConfirmed: (() -> Unit)? = null
     private var onBreakSkipped: (() -> Unit)? = null
+    private var onBreakTriggered: (() -> Unit)? = null
 
     private var pendingElapsedAtPause: Long = 0
 
@@ -46,6 +47,7 @@ class SessionViewModel(
             timerViewModel.pause()
             _breaksTriggered.value = _breaksTriggered.value + 1
             _sessionState.value = "break_pending"
+            onBreakTriggered?.invoke()
         }
     }
 
@@ -53,12 +55,14 @@ class SessionViewModel(
         onStart: () -> Unit,
         onEnd: () -> Unit,
         onConfirm: () -> Unit,
-        onSkip: () -> Unit
+        onSkip: () -> Unit,
+        onTrigger: () -> Unit
     ) {
         onStartSession = onStart
         onEndSession = onEnd
         onBreakConfirmed = onConfirm
         onBreakSkipped = onSkip
+        onBreakTriggered = onTrigger
     }
 
     fun handleStart() {
