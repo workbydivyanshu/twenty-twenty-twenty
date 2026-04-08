@@ -623,68 +623,40 @@ button:focus-visible {
 }
 
 .break-ring-wrap {
-  position: relative;
-  width: 240px;
-  height: 240px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: ringIn 0.6s var(--ease-spring);
+	position: relative;
+	width: 240px;
+	height: 180px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	animation: ringIn 0.6s var(--ease-spring);
 }
 
 @keyframes ringIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.break-ring-svg {
-  position: absolute;
-  inset: 0;
-  transform: rotate(-90deg);
-}
-
-.break-ring-bg {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.05);
-  stroke-width: 3;
-}
-
-.break-ring-progress {
-  fill: none;
-  stroke: url(#ringGradient);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-dasharray: 691.15;
-  stroke-dashoffset: 691.15;
-  filter: drop-shadow(0 0 12px rgba(129, 140, 248, 0.6));
-  transition: stroke-dashoffset 0.1s linear;
+	from {
+		transform: scale(0.8);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
 }
 
 .break-countdown {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 64px;
-  font-weight: 300;
-  letter-spacing: -4px;
-  color: var(--text-primary);
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
-  animation: countdownPulse 1s ease-in-out infinite;
+	font-family: var(--font-display);
+	font-size: 110px;
+	font-weight: 300;
+	letter-spacing: -6px;
+	color: var(--text-primary);
+	font-variant-numeric: tabular-nums;
+	line-height: 1;
+	animation: countdownPulse 1s ease-in-out infinite;
 }
 
 @keyframes countdownPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.03); }
+	0%, 100% { transform: scale(1); }
+	50% { transform: scale(1.05); }
 }
 
 .break-title {

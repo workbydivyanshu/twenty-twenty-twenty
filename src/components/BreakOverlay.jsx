@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { RING_CIRCUMFERENCE } from '../utils/constants';
 
 export default function BreakOverlay({
 	sessionState,
@@ -17,7 +16,6 @@ export default function BreakOverlay({
 	const isCountdownActive = sessionState === 'break_active' && countdown > 0;
 	const showConfirmPrompt = sessionState === 'break_active' && countdown === 0;
 	const progress = countdown > 0 ? (20 - countdown) / 20 : 1;
-	const dashOffset = RING_CIRCUMFERENCE * (1 - progress);
 
 	return (
 		<div className="break-overlay" role="dialog" aria-modal="true" aria-labelledby="break-title">
@@ -63,16 +61,6 @@ export default function BreakOverlay({
 			{isCountdownActive && (
 				<>
 					<div className="break-ring-wrap">
-						<svg className="break-ring-svg" width="240" height="240" viewBox="0 0 240 240">
-							<circle className="break-ring-bg" cx="120" cy="120" r={110} />
-							<circle
-								className="break-ring-progress"
-								cx="120"
-								cy="120"
-								r={110}
-								style={{ strokeDashoffset: dashOffset }}
-							/>
-						</svg>
 						<div className="break-countdown" aria-live="assertive" aria-atomic="true">
 							{countdown}
 						</div>

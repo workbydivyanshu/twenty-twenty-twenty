@@ -32542,6 +32542,8 @@ com.twenty.app.data.Settings:
     public final boolean component2()
     public final float component3()
     public final boolean component4()
+    public final java.lang.String component5()
+    public final java.lang.String getActiveProfileId()
 com.twenty.app.data.Storage$special$$inlined$map$1$2$1:
     java.lang.Object L$0
 com.twenty.app.data.Storage$special$$inlined$map$2$2$1:
@@ -41656,7 +41658,7 @@ androidx.collection.LongSparseArray:
 androidx.collection.LongSparseArrayKt:
     public static final synthetic java.lang.Object access$getDELETED$p()
 androidx.collection.LruCache
-androidx.collection.MutableFloatSet$$InternalSyntheticThrowCCEIfNotNull$309$43182fb1594507a514bf18492a0543eba5365d3c2285497da49e3ee6a9723e21$0
+androidx.collection.MutableFloatSet$$InternalSyntheticThrowCCEIfNotNull$310$43182fb1594507a514bf18492a0543eba5365d3c2285497da49e3ee6a9723e21$0
 androidx.collection.MutableFloatSet
 androidx.collection.MutableIntIntMap:
     public static void adjustStorage()
@@ -42290,7 +42292,7 @@ androidx.compose.foundation.BackgroundElement:
     public static void update()
 androidx.compose.foundation.BackgroundKt$background$$inlined$debugInspectorInfo$1$$InternalSyntheticThrowCCEIfNotNull$16$f0ed138cf4d07526bdd59651ec53f19eed7d84790be10335f720ac00234b4d08$0
 androidx.compose.foundation.BackgroundKt$background$$inlined$debugInspectorInfo$1
-androidx.compose.foundation.BackgroundKt$background-bw27NRU$$inlined$debugInspectorInfo$1$$InternalSyntheticThrowCCEIfNotNull$50$c9c3c5b1b86ea217e3356ad06dbce618aded832ee31ba436111a1453d967d754$0
+androidx.compose.foundation.BackgroundKt$background-bw27NRU$$inlined$debugInspectorInfo$1$$InternalSyntheticThrowCCEIfNotNull$49$c9c3c5b1b86ea217e3356ad06dbce618aded832ee31ba436111a1453d967d754$0
 androidx.compose.foundation.BackgroundKt$background-bw27NRU$$inlined$debugInspectorInfo$1
 androidx.compose.foundation.BackgroundKt:
     public static synthetic androidx.compose.ui.Modifier background-bw27NRU$default(androidx.compose.ui.Modifier,long)
@@ -43921,7 +43923,7 @@ androidx.compose.foundation.text.modifiers.ParagraphLayoutCache:
     public final void update-L6sJoHM(java.lang.String,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.font.FontFamily$Resolver,int,boolean,int,int)
 androidx.compose.foundation.text.modifiers.SelectableTextAnnotatedStringElement
 androidx.compose.foundation.text.modifiers.SelectableTextAnnotatedStringNode
-androidx.compose.foundation.text.modifiers.SelectionController$$InternalSyntheticThrowCCEIfNotNull$175$507431bc4a0890139aec1f318bc7ea285935d6c78543b3dfb90c5a1488716760$0
+androidx.compose.foundation.text.modifiers.SelectionController$$InternalSyntheticThrowCCEIfNotNull$176$507431bc4a0890139aec1f318bc7ea285935d6c78543b3dfb90c5a1488716760$0
 androidx.compose.foundation.text.modifiers.SelectionController$modifier$1
 androidx.compose.foundation.text.modifiers.SelectionController$onRemembered$1
 androidx.compose.foundation.text.modifiers.SelectionController$onRemembered$2
@@ -47161,11 +47163,11 @@ androidx.compose.ui.focus.FocusOwner:
     public abstract void scheduleInvalidation()
     public abstract void scheduleInvalidation$1()
     public abstract void scheduleInvalidation$2()
-androidx.compose.ui.focus.FocusOwnerImpl$$InternalSyntheticThrowCCEIfNotNull$75$c59728175dd1f88c66c88b08405c51c9d393b1c10fabbe27f10b9677ef83ef47$0
-androidx.compose.ui.focus.FocusOwnerImpl$$InternalSyntheticThrowCCEIfNotNull$75$c59728175dd1f88c66c88b08405c51c9d393b1c10fabbe27f10b9677ef83ef47$1
-androidx.compose.ui.focus.FocusOwnerImpl$$InternalSyntheticThrowCCEIfNotNull$75$c59728175dd1f88c66c88b08405c51c9d393b1c10fabbe27f10b9677ef83ef47$2
-androidx.compose.ui.focus.FocusOwnerImpl$$InternalSyntheticThrowCCEIfNotNull$75$c59728175dd1f88c66c88b08405c51c9d393b1c10fabbe27f10b9677ef83ef47$3
-androidx.compose.ui.focus.FocusOwnerImpl$$InternalSyntheticThrowCCEIfNotNull$75$c59728175dd1f88c66c88b08405c51c9d393b1c10fabbe27f10b9677ef83ef47$4
+androidx.compose.ui.focus.FocusOwnerImpl$$InternalSyntheticThrowCCEIfNotNull$74$c59728175dd1f88c66c88b08405c51c9d393b1c10fabbe27f10b9677ef83ef47$0
+androidx.compose.ui.focus.FocusOwnerImpl$$InternalSyntheticThrowCCEIfNotNull$74$c59728175dd1f88c66c88b08405c51c9d393b1c10fabbe27f10b9677ef83ef47$1
+androidx.compose.ui.focus.FocusOwnerImpl$$InternalSyntheticThrowCCEIfNotNull$74$c59728175dd1f88c66c88b08405c51c9d393b1c10fabbe27f10b9677ef83ef47$2
+androidx.compose.ui.focus.FocusOwnerImpl$$InternalSyntheticThrowCCEIfNotNull$74$c59728175dd1f88c66c88b08405c51c9d393b1c10fabbe27f10b9677ef83ef47$3
+androidx.compose.ui.focus.FocusOwnerImpl$$InternalSyntheticThrowCCEIfNotNull$74$c59728175dd1f88c66c88b08405c51c9d393b1c10fabbe27f10b9677ef83ef47$4
 androidx.compose.ui.focus.FocusOwnerImpl$WhenMappings
 androidx.compose.ui.focus.FocusOwnerImpl$clearFocus$clearedFocusSuccessfully$1:
     public final void invoke()
@@ -49366,9 +49368,9 @@ androidx.compose.ui.node.BackwardsCompatNode$$InternalSyntheticThrowCCEIfNotNull
 androidx.compose.ui.node.BackwardsCompatNode$$InternalSyntheticThrowCCEIfNotNull$10$e32183bba448871fc58a1bc1fa949ef05f96cf21d57e4acded7ba05d151c58ca$0
 androidx.compose.ui.node.BackwardsCompatNode$$InternalSyntheticThrowCCEIfNotNull$12$3e260ccdb2c62e0fa7052269f322ebc39114f92dab6192c0103e9ce37415b129$0
 androidx.compose.ui.node.BackwardsCompatNode$$InternalSyntheticThrowCCEIfNotNull$12$960aa321f39fe54effb9db94d7d8aa5ecac48931e4df04ad2884efda5987534e$0
-androidx.compose.ui.node.BackwardsCompatNode$$InternalSyntheticThrowCCEIfNotNull$93$6e0e3aa2ed280a3d49d3bbcc500b2b3ddb88cc774afd0ad6d0d6e0f23aef2b2b$0
-androidx.compose.ui.node.BackwardsCompatNode$$InternalSyntheticThrowCCEIfNotNull$93$6e0e3aa2ed280a3d49d3bbcc500b2b3ddb88cc774afd0ad6d0d6e0f23aef2b2b$1
-androidx.compose.ui.node.BackwardsCompatNode$$InternalSyntheticThrowCCEIfNotNull$93$f333280ab3c2d798595492ec47c101aaac12127903b2bafb42c3b40243004989$0
+androidx.compose.ui.node.BackwardsCompatNode$$InternalSyntheticThrowCCEIfNotNull$94$6e0e3aa2ed280a3d49d3bbcc500b2b3ddb88cc774afd0ad6d0d6e0f23aef2b2b$0
+androidx.compose.ui.node.BackwardsCompatNode$$InternalSyntheticThrowCCEIfNotNull$94$6e0e3aa2ed280a3d49d3bbcc500b2b3ddb88cc774afd0ad6d0d6e0f23aef2b2b$1
+androidx.compose.ui.node.BackwardsCompatNode$$InternalSyntheticThrowCCEIfNotNull$94$f333280ab3c2d798595492ec47c101aaac12127903b2bafb42c3b40243004989$0
 androidx.compose.ui.node.BackwardsCompatNode$initializeModifier$2:
     public final void invoke()
 androidx.compose.ui.node.BackwardsCompatNode$initializeModifier$3
@@ -49759,7 +49761,7 @@ androidx.compose.ui.node.LayoutNodeLayoutDelegate:
 androidx.compose.ui.node.LayoutTreeConsistencyChecker
 androidx.compose.ui.node.LookaheadAlignmentLines:
     static void <clinit>()
-androidx.compose.ui.node.LookaheadCapablePlaceable$$InternalSyntheticThrowCCEIfNotNull$85$6a3235e19958f3c800cf563be8a94368cab35ebf77150b804cfafd341b0cc97d$0
+androidx.compose.ui.node.LookaheadCapablePlaceable$$InternalSyntheticThrowCCEIfNotNull$86$6a3235e19958f3c800cf563be8a94368cab35ebf77150b804cfafd341b0cc97d$0
 androidx.compose.ui.node.LookaheadCapablePlaceable$Companion$onCommitAffectingRuler$1:
     public static void invoke$42()
 androidx.compose.ui.node.LookaheadCapablePlaceable$Companion
@@ -51592,15 +51594,15 @@ androidx.compose.ui.text.caches.SimpleArrayMap:
     public final java.lang.Object valueAt(int)
 androidx.compose.ui.text.font.AndroidFont$TypefaceLoader
 androidx.compose.ui.text.font.AndroidFont
-androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$120$b663a48dbef432d01d36ffc53a124fef7a5f1d78703ba8b6e80c67c77751099b$0
-androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$120$b663a48dbef432d01d36ffc53a124fef7a5f1d78703ba8b6e80c67c77751099b$1
-androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$120$b663a48dbef432d01d36ffc53a124fef7a5f1d78703ba8b6e80c67c77751099b$2
-androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$120$b663a48dbef432d01d36ffc53a124fef7a5f1d78703ba8b6e80c67c77751099b$3
-androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$48$5fb84b31842a528f59822ccc7c97b00af4f45ea8b1cf80e2d8f01a7ee8812bca$0
-androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$48$5fb84b31842a528f59822ccc7c97b00af4f45ea8b1cf80e2d8f01a7ee8812bca$1
-androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$48$5fb84b31842a528f59822ccc7c97b00af4f45ea8b1cf80e2d8f01a7ee8812bca$2
-androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$48$5fb84b31842a528f59822ccc7c97b00af4f45ea8b1cf80e2d8f01a7ee8812bca$3
-androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$48$5fb84b31842a528f59822ccc7c97b00af4f45ea8b1cf80e2d8f01a7ee8812bca$4
+androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$47$5fb84b31842a528f59822ccc7c97b00af4f45ea8b1cf80e2d8f01a7ee8812bca$0
+androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$47$5fb84b31842a528f59822ccc7c97b00af4f45ea8b1cf80e2d8f01a7ee8812bca$1
+androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$47$5fb84b31842a528f59822ccc7c97b00af4f45ea8b1cf80e2d8f01a7ee8812bca$2
+androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$47$5fb84b31842a528f59822ccc7c97b00af4f45ea8b1cf80e2d8f01a7ee8812bca$3
+androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$47$5fb84b31842a528f59822ccc7c97b00af4f45ea8b1cf80e2d8f01a7ee8812bca$4
+androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$99$b663a48dbef432d01d36ffc53a124fef7a5f1d78703ba8b6e80c67c77751099b$0
+androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$99$b663a48dbef432d01d36ffc53a124fef7a5f1d78703ba8b6e80c67c77751099b$1
+androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$99$b663a48dbef432d01d36ffc53a124fef7a5f1d78703ba8b6e80c67c77751099b$2
+androidx.compose.ui.text.font.AndroidFontLoader$$InternalSyntheticThrowCCEIfNotNull$99$b663a48dbef432d01d36ffc53a124fef7a5f1d78703ba8b6e80c67c77751099b$3
 androidx.compose.ui.text.font.AndroidFontLoader$awaitLoad$1
 androidx.compose.ui.text.font.AndroidFontLoader:
     public static final int $stable
@@ -51619,8 +51621,8 @@ androidx.compose.ui.text.font.AndroidFontResolveInterceptor_androidKt
 androidx.compose.ui.text.font.AndroidFontUtils_androidKt:
     public static final int getAndroidTypefaceStyle(boolean,boolean)
 androidx.compose.ui.text.font.AsyncFontListLoader$$InternalSyntheticThrowCCEIfNotNull$135$cc4e108c24fe962fab6864452822ad9b53eb9e043d858356aa3a8cb47ed836b7$0
-androidx.compose.ui.text.font.AsyncFontListLoader$$InternalSyntheticThrowCCEIfNotNull$95$f316b05f9996028cd39f9c39e9b721b97eee2a3d1d9afc12471b3d865057f225$0
-androidx.compose.ui.text.font.AsyncFontListLoader$$InternalSyntheticThrowCCEIfNotNull$95$f316b05f9996028cd39f9c39e9b721b97eee2a3d1d9afc12471b3d865057f225$1
+androidx.compose.ui.text.font.AsyncFontListLoader$$InternalSyntheticThrowCCEIfNotNull$78$f316b05f9996028cd39f9c39e9b721b97eee2a3d1d9afc12471b3d865057f225$0
+androidx.compose.ui.text.font.AsyncFontListLoader$$InternalSyntheticThrowCCEIfNotNull$78$f316b05f9996028cd39f9c39e9b721b97eee2a3d1d9afc12471b3d865057f225$1
 androidx.compose.ui.text.font.AsyncFontListLoader$load$1
 androidx.compose.ui.text.font.AsyncFontListLoader$load$2$typeface$1
 androidx.compose.ui.text.font.AsyncFontListLoader$loadWithTimeoutOrNull$1
@@ -51673,7 +51675,7 @@ androidx.compose.ui.text.font.FontListFontFamilyTypefaceAdapter:
     public final androidx.compose.ui.text.font.AsyncTypefaceCache asyncTypefaceCache
     public static final androidx.compose.ui.text.font.FontMatcher fontMatcher
     public static androidx.compose.ui.text.font.TypefaceResult resolve()
-androidx.compose.ui.text.font.FontListFontFamilyTypefaceAdapterKt$$InternalSyntheticThrowCCEIfNotNull$52$7eac755079294a94ae4343a5fbcbb01d5901de4ff895afeff135f887cfd5e6eb$0
+androidx.compose.ui.text.font.FontListFontFamilyTypefaceAdapterKt$$InternalSyntheticThrowCCEIfNotNull$51$7eac755079294a94ae4343a5fbcbb01d5901de4ff895afeff135f887cfd5e6eb$0
 androidx.compose.ui.text.font.FontListFontFamilyTypefaceAdapterKt
 androidx.compose.ui.text.font.FontLoadingStrategy$Companion
 androidx.compose.ui.text.font.FontLoadingStrategy
@@ -51783,7 +51785,7 @@ androidx.compose.ui.text.font.TypefaceResult$Immutable:
     public final boolean getCacheable()
 androidx.compose.ui.text.font.TypefaceResult:
     public abstract boolean getCacheable()
-androidx.compose.ui.text.input.CommitTextCommand$$InternalSyntheticThrowCCEIfNotNull$309$28ac468c36c479d67d181b689c213384af8f8c0befab3f3dc2d08182b5e8f464$0
+androidx.compose.ui.text.input.CommitTextCommand$$InternalSyntheticThrowCCEIfNotNull$310$28ac468c36c479d67d181b689c213384af8f8c0befab3f3dc2d08182b5e8f464$0
 androidx.compose.ui.text.input.CommitTextCommand
 androidx.compose.ui.text.input.CursorAnchorInfoApi33Helper$$InternalSyntheticApiModelOutline$16$4cb84e6e8e61de69f0c96ea9bd5f39684f9fbf4c80aaf5379c25a6a4f3e0ea84$0
 androidx.compose.ui.text.input.CursorAnchorInfoApi33Helper$$InternalSyntheticApiModelOutline$2$4cb84e6e8e61de69f0c96ea9bd5f39684f9fbf4c80aaf5379c25a6a4f3e0ea84$0
@@ -51891,7 +51893,7 @@ androidx.compose.ui.text.input.PlatformImeOptions
 androidx.compose.ui.text.input.PlatformTextInputService
 androidx.compose.ui.text.input.RecordingInputConnection
 androidx.compose.ui.text.input.SetComposingRegionCommand
-androidx.compose.ui.text.input.SetComposingTextCommand$$InternalSyntheticThrowCCEIfNotNull$309$5c8908dba92fbd5044df9729aff07e3715be5e6cdcab0236e2bb46c1a0c6e3b0$0
+androidx.compose.ui.text.input.SetComposingTextCommand$$InternalSyntheticThrowCCEIfNotNull$310$5c8908dba92fbd5044df9729aff07e3715be5e6cdcab0236e2bb46c1a0c6e3b0$0
 androidx.compose.ui.text.input.SetComposingTextCommand
 androidx.compose.ui.text.input.SetSelectionCommand
 androidx.compose.ui.text.input.TextFieldValue$Companion$Saver$1
@@ -53432,10 +53434,10 @@ androidx.datastore.preferences.protobuf.ExtensionRegistryLite:
     public static void findLiteExtensionByNumber()
 androidx.datastore.preferences.protobuf.ExtensionSchema
 androidx.datastore.preferences.protobuf.ExtensionSchemaLite$$InternalSyntheticThrowCCEIfNotNull$10$e25c184836d93970789fa5f6a4f1a231cfa9a3bf94c8a284869e72f64ed3315b$0
-androidx.datastore.preferences.protobuf.ExtensionSchemaLite$$InternalSyntheticThrowCCEIfNotNull$65$3e34cb2f140969c0619dca7f35f13bbe35268ec1c08002245940249bce97f47e$0
-androidx.datastore.preferences.protobuf.ExtensionSchemaLite$$InternalSyntheticThrowCCEIfNotNull$83$41d7c8792b18fba4d931d6e1cdc30f17f9f2b131ad2f06c10c840ac1c9730562$0
-androidx.datastore.preferences.protobuf.ExtensionSchemaLite$$InternalSyntheticThrowCCEIfNotNull$90$520b94fdec3d3f07cec41d320e347e8a8d58aa93dfce44cf31afc009f56675ae$0
-androidx.datastore.preferences.protobuf.ExtensionSchemaLite$$InternalSyntheticThrowCCEIfNotNull$95$30b2d5c35521e6544704c637079c55a0910a4c12d4d2207553564023210d211f$0
+androidx.datastore.preferences.protobuf.ExtensionSchemaLite$$InternalSyntheticThrowCCEIfNotNull$64$3e34cb2f140969c0619dca7f35f13bbe35268ec1c08002245940249bce97f47e$0
+androidx.datastore.preferences.protobuf.ExtensionSchemaLite$$InternalSyntheticThrowCCEIfNotNull$84$41d7c8792b18fba4d931d6e1cdc30f17f9f2b131ad2f06c10c840ac1c9730562$0
+androidx.datastore.preferences.protobuf.ExtensionSchemaLite$$InternalSyntheticThrowCCEIfNotNull$91$520b94fdec3d3f07cec41d320e347e8a8d58aa93dfce44cf31afc009f56675ae$0
+androidx.datastore.preferences.protobuf.ExtensionSchemaLite$$InternalSyntheticThrowCCEIfNotNull$96$30b2d5c35521e6544704c637079c55a0910a4c12d4d2207553564023210d211f$0
 androidx.datastore.preferences.protobuf.ExtensionSchemaLite$1
 androidx.datastore.preferences.protobuf.ExtensionSchemaLite:
     public static int extensionNumber()
@@ -53455,16 +53457,16 @@ androidx.datastore.preferences.protobuf.FieldInfo
 androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$18$2a304ff24c83803e486d4d7659f8b9a253df2c43d07261e6b3d8235b06f28689$0
 androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$37$4356343c62ed729186fe05a668b6b8d6b5aca190094741966cb8bec04c6e7d29$0
 androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$37$4356343c62ed729186fe05a668b6b8d6b5aca190094741966cb8bec04c6e7d29$1
-androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$62$9c9b36fdaa7372eea519abead43a2de1eec8106073390dcb8e1e0351de6e77e7$0
-androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$65$b56f1e7843a97fadff060602d217a55c8be861562d551059c4d5f209b4f0a481$0
-androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$65$b56f1e7843a97fadff060602d217a55c8be861562d551059c4d5f209b4f0a481$1
-androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$65$b56f1e7843a97fadff060602d217a55c8be861562d551059c4d5f209b4f0a481$2
-androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$65$b56f1e7843a97fadff060602d217a55c8be861562d551059c4d5f209b4f0a481$3
-androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$65$d6e17a2624f3202cdfab97a88a48132cd813ac78792bb98efc3026a66a56b3b9$0
-androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$65$d6e17a2624f3202cdfab97a88a48132cd813ac78792bb98efc3026a66a56b3b9$1
-androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$73$da7e74b8c47d707c13ba91483b2aaf98bf00fd75eaeef40a3cc92253c93f211c$0
-androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$73$da7e74b8c47d707c13ba91483b2aaf98bf00fd75eaeef40a3cc92253c93f211c$1
-androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$77$7ac61fd66721836dfa6ff5d2712b24289d572eb1425f0a27386a1552db803d03$0
+androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$61$9c9b36fdaa7372eea519abead43a2de1eec8106073390dcb8e1e0351de6e77e7$0
+androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$64$b56f1e7843a97fadff060602d217a55c8be861562d551059c4d5f209b4f0a481$0
+androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$64$b56f1e7843a97fadff060602d217a55c8be861562d551059c4d5f209b4f0a481$1
+androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$64$b56f1e7843a97fadff060602d217a55c8be861562d551059c4d5f209b4f0a481$2
+androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$64$b56f1e7843a97fadff060602d217a55c8be861562d551059c4d5f209b4f0a481$3
+androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$64$d6e17a2624f3202cdfab97a88a48132cd813ac78792bb98efc3026a66a56b3b9$0
+androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$64$d6e17a2624f3202cdfab97a88a48132cd813ac78792bb98efc3026a66a56b3b9$1
+androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$72$da7e74b8c47d707c13ba91483b2aaf98bf00fd75eaeef40a3cc92253c93f211c$0
+androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$72$da7e74b8c47d707c13ba91483b2aaf98bf00fd75eaeef40a3cc92253c93f211c$1
+androidx.datastore.preferences.protobuf.FieldSet$$InternalSyntheticThrowCCEIfNotNull$76$7ac61fd66721836dfa6ff5d2712b24289d572eb1425f0a27386a1552db803d03$0
 androidx.datastore.preferences.protobuf.FieldSet$1
 androidx.datastore.preferences.protobuf.FieldSet$FieldDescriptorLite
 androidx.datastore.preferences.protobuf.FieldSet:
@@ -53671,8 +53673,8 @@ androidx.datastore.preferences.protobuf.MessageInfo:
 androidx.datastore.preferences.protobuf.MessageLite$Builder
 androidx.datastore.preferences.protobuf.MessageLite
 androidx.datastore.preferences.protobuf.MessageLiteOrBuilder
-androidx.datastore.preferences.protobuf.MessageLiteToString$$InternalSyntheticThrowCCEIfNotNull$48$406e73baedfd5922043ec92313a7c11ffb9e9c85a817968f3ab3c0039efcc0c6$0
-androidx.datastore.preferences.protobuf.MessageLiteToString$$InternalSyntheticThrowCCEIfNotNull$48$406e73baedfd5922043ec92313a7c11ffb9e9c85a817968f3ab3c0039efcc0c6$1
+androidx.datastore.preferences.protobuf.MessageLiteToString$$InternalSyntheticThrowCCEIfNotNull$47$406e73baedfd5922043ec92313a7c11ffb9e9c85a817968f3ab3c0039efcc0c6$0
+androidx.datastore.preferences.protobuf.MessageLiteToString$$InternalSyntheticThrowCCEIfNotNull$47$406e73baedfd5922043ec92313a7c11ffb9e9c85a817968f3ab3c0039efcc0c6$1
 androidx.datastore.preferences.protobuf.MessageSchema:
     public final androidx.datastore.preferences.protobuf.ExtensionSchemaLite extensionSchema
     public final boolean hasExtensions
@@ -54115,7 +54117,7 @@ androidx.lifecycle.ProcessLifecycleOwner:
     public static void dispatchPauseIfNeeded$lifecycle_process_release()
     public final void dispatchStopIfNeeded$lifecycle_process_release()
 androidx.lifecycle.ReportFragment$ActivityInitializationListener
-androidx.lifecycle.ReportFragment$Companion$$InternalSyntheticThrowCCEIfNotNull$201$6606f6a9d6c00feabd13f693204c7c685bcfd577a1c056fdbb01af5d22a24ba7$0
+androidx.lifecycle.ReportFragment$Companion$$InternalSyntheticThrowCCEIfNotNull$202$6606f6a9d6c00feabd13f693204c7c685bcfd577a1c056fdbb01af5d22a24ba7$0
 androidx.lifecycle.ReportFragment$Companion:
     public static androidx.lifecycle.ReportFragment get()
 androidx.lifecycle.ReportFragment$LifecycleCallbacks$Companion:
@@ -54127,7 +54129,7 @@ androidx.lifecycle.ReportFragment:
     public static void dispatchResume()
     public static void dispatchStart()
     public static void setProcessListener()
-androidx.lifecycle.SavedStateHandle$$InternalSyntheticThrowCCEIfNotNull$115$ba21a8e220df1d9e83937e71e2efe8470d16b8e2c75b3f79b3625ca0a163a78d$0
+androidx.lifecycle.SavedStateHandle$$InternalSyntheticThrowCCEIfNotNull$130$ba21a8e220df1d9e83937e71e2efe8470d16b8e2c75b3f79b3625ca0a163a78d$0
 androidx.lifecycle.SavedStateHandle$Companion:
     public static boolean validateValue()
 androidx.lifecycle.SavedStateHandle:
@@ -54354,6 +54356,8 @@ androidx.versionedparcelable.VersionedParcelParcel:
     public final void writeParcelable()
     public final void writeString(java.lang.String)
 com.google.common.util.concurrent.ListenableFuture
+com.twenty.app.MainActivity$notificationPermissionLauncher$1$1:
+    public final java.lang.Object invoke$4()
 com.twenty.app.MainActivity$notificationReceiver$1$onReceive$1$1$1:
     public final java.lang.Object invoke$4()
 com.twenty.app.MainActivity$notificationReceiver$1$onReceive$1:
@@ -54429,7 +54433,7 @@ com.twenty.app.data.Storage:
     public static java.lang.String generateId()
     public static kotlinx.coroutines.flow.Flow getSessionsFlow()
     public static kotlinx.coroutines.flow.Flow getSettingsFlow()
-    public static java.lang.Object saveSettings()
+    public final java.lang.Object saveSettings(com.twenty.app.data.Settings,kotlin.coroutines.Continuation)
 com.twenty.app.domain.BestDay:
     public static final int $stable
     static void <clinit>()
@@ -55353,8 +55357,8 @@ kotlinx.coroutines.CoroutineExceptionHandler:
     static void <clinit>()
 kotlinx.coroutines.CoroutineExceptionHandlerKt:
     public static final java.lang.Throwable handlerException(java.lang.Throwable,java.lang.Throwable)
-kotlinx.coroutines.CoroutineId$$InternalSyntheticThrowCCEIfNotNull$309$a7d8b984f14ef6811fc36f0d030a1c8a7f27075d192601697212118d266ca07a$0
 kotlinx.coroutines.CoroutineId$$InternalSyntheticThrowCCEIfNotNull$31$db4fcf294f73e0414b61d779f72a560fad56831e560e6b71def36fecaf64a8d1$0
+kotlinx.coroutines.CoroutineId$$InternalSyntheticThrowCCEIfNotNull$310$a7d8b984f14ef6811fc36f0d030a1c8a7f27075d192601697212118d266ca07a$0
 kotlinx.coroutines.CoroutineId$Key
 kotlinx.coroutines.CoroutineId
 kotlinx.coroutines.CoroutineName:
@@ -55449,8 +55453,7 @@ kotlinx.coroutines.JobImpl:
     public static boolean handlesException()
 kotlinx.coroutines.JobKt:
     public static kotlinx.coroutines.JobImpl Job$default()
-    public static final void cancel(kotlin.coroutines.CoroutineContext,java.util.concurrent.CancellationException)
-    public static void cancel$default(kotlin.coroutines.CoroutineContext)
+    public static synthetic void cancel$default(kotlin.coroutines.CoroutineContext)
     public static void cancel$default(kotlinx.coroutines.Job,java.lang.String)
     public static final void ensureActive(kotlinx.coroutines.Job)
     public static synthetic kotlinx.coroutines.DisposableHandle invokeOnCompletion$default(kotlinx.coroutines.Job,kotlinx.coroutines.JobNode)
@@ -55570,15 +55573,15 @@ kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticBackportWithForwar
 kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticLambda$1$84981572252ad808dcd039503a43d9db20394a0fa0ce9d33b456ce1546497363$0
 kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticLambda$2$39f407d043514cc825d348d9b85c126a460a51cc72baa8ba53bafca369b63a08$0
 kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$16$0750dc0ce98ba4e63a9893bd668ee24b07a45a6126c7472d344c8d3d810768d1$0
-kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$50$ede10579b622c50962ff73dd2f82c141abf9f8a33531ab07fe72fe1a6b92cb41$0
-kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$50$ede10579b622c50962ff73dd2f82c141abf9f8a33531ab07fe72fe1a6b92cb41$1
-kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$50$ede10579b622c50962ff73dd2f82c141abf9f8a33531ab07fe72fe1a6b92cb41$2
-kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$52$1bb6e5cf839f3124517897dcbfa0502b9b5985320d9fac2dcb2d5f0b0cf2bdf9$0
-kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$52$1bb6e5cf839f3124517897dcbfa0502b9b5985320d9fac2dcb2d5f0b0cf2bdf9$1
-kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$52$1bb6e5cf839f3124517897dcbfa0502b9b5985320d9fac2dcb2d5f0b0cf2bdf9$2
-kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$62$477558f47305b46a97e98327e82dc157ded03b2c689ba9650782ad95656735aa$0
-kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$62$477558f47305b46a97e98327e82dc157ded03b2c689ba9650782ad95656735aa$1
-kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$62$477558f47305b46a97e98327e82dc157ded03b2c689ba9650782ad95656735aa$2
+kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$84$477558f47305b46a97e98327e82dc157ded03b2c689ba9650782ad95656735aa$0
+kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$84$477558f47305b46a97e98327e82dc157ded03b2c689ba9650782ad95656735aa$1
+kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$84$477558f47305b46a97e98327e82dc157ded03b2c689ba9650782ad95656735aa$2
+kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$84$ede10579b622c50962ff73dd2f82c141abf9f8a33531ab07fe72fe1a6b92cb41$0
+kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$84$ede10579b622c50962ff73dd2f82c141abf9f8a33531ab07fe72fe1a6b92cb41$1
+kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$84$ede10579b622c50962ff73dd2f82c141abf9f8a33531ab07fe72fe1a6b92cb41$2
+kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$86$1bb6e5cf839f3124517897dcbfa0502b9b5985320d9fac2dcb2d5f0b0cf2bdf9$0
+kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$86$1bb6e5cf839f3124517897dcbfa0502b9b5985320d9fac2dcb2d5f0b0cf2bdf9$1
+kotlinx.coroutines.channels.BufferedChannel$$InternalSyntheticThrowCCEIfNotNull$86$1bb6e5cf839f3124517897dcbfa0502b9b5985320d9fac2dcb2d5f0b0cf2bdf9$2
 kotlinx.coroutines.channels.BufferedChannel$BufferedChannelIterator:
     public static java.lang.Object hasNextOnNoWaiterSuspend()
     public static boolean onClosedHasNext()
@@ -55718,7 +55721,7 @@ kotlinx.coroutines.flow.ReadonlyStateFlow:
     public final kotlinx.coroutines.Job job
 kotlinx.coroutines.flow.SafeFlow:
     public static java.lang.Object collectSafely()
-kotlinx.coroutines.flow.SharedFlowImpl$$InternalSyntheticThrowCCEIfNotNull$158$8a81ae7abf994ef8d5da0c3a1e1fcc00bff1251b789a1cb954e12c66d854807b$0
+kotlinx.coroutines.flow.SharedFlowImpl$$InternalSyntheticThrowCCEIfNotNull$160$8a81ae7abf994ef8d5da0c3a1e1fcc00bff1251b789a1cb954e12c66d854807b$0
 kotlinx.coroutines.flow.SharedFlowImpl$WhenMappings
 kotlinx.coroutines.flow.SharedFlowImpl:
     public static void cancelEmitter()
@@ -55755,7 +55758,7 @@ kotlinx.coroutines.flow.StartedWhileSubscribed$command$1:
 kotlinx.coroutines.flow.StartedWhileSubscribed$command$2:
     public int label
     public final java.lang.Object invoke$51()
-kotlinx.coroutines.flow.StateFlowImpl$$InternalSyntheticThrowCCEIfNotNull$158$f1d1f40a1c8fc04c0a8d71575b6c25dc238f9224ed939db2b509a92e2c81cbda$0
+kotlinx.coroutines.flow.StateFlowImpl$$InternalSyntheticThrowCCEIfNotNull$160$f1d1f40a1c8fc04c0a8d71575b6c25dc238f9224ed939db2b509a92e2c81cbda$0
 kotlinx.coroutines.flow.StateFlowImpl:
     public final boolean compareAndSet(java.lang.Object,java.lang.Object)
     public static kotlinx.coroutines.flow.StateFlowSlot createSlot()
@@ -55927,7 +55930,7 @@ kotlinx.coroutines.internal.SystemPropsKt:
     public static final boolean systemProp(java.lang.String,boolean)
     public static synthetic long systemProp$default(java.lang.String,long)
 kotlinx.coroutines.internal.SystemPropsKt__SystemProps_commonKt
-kotlinx.coroutines.internal.ThreadContextKt$$InternalSyntheticThrowCCEIfNotNull$309$7c661674ba55b64cfe60deef36cf7e9a62bb95fc2a8f0b63be336db8c26a2201$0
+kotlinx.coroutines.internal.ThreadContextKt$$InternalSyntheticThrowCCEIfNotNull$310$7c661674ba55b64cfe60deef36cf7e9a62bb95fc2a8f0b63be336db8c26a2201$0
 kotlinx.coroutines.internal.ThreadLocalKt
 kotlinx.coroutines.internal.ThreadSafeHeap:
     public final kotlinx.coroutines.EventLoopImplBase$DelayedTask firstImpl()
@@ -56042,8 +56045,8 @@ kotlinx.coroutines.sync.SemaphoreAndMutexImpl$$InternalSyntheticBackportWithForw
 kotlinx.coroutines.sync.SemaphoreAndMutexImpl$$InternalSyntheticBackportWithForwarding$2$53e71bb053d7fc85253cad122a138acc8094b705e6cfa9538602410855fb8511$2
 kotlinx.coroutines.sync.SemaphoreAndMutexImpl$$InternalSyntheticBackportWithForwarding$3$b3e079840ad77ca0f67d2384158fa91a2ca5ae14588f17724e9e20a47fe36225$0
 kotlinx.coroutines.sync.SemaphoreAndMutexImpl$$InternalSyntheticBackportWithForwarding$3$b3e079840ad77ca0f67d2384158fa91a2ca5ae14588f17724e9e20a47fe36225$1
-kotlinx.coroutines.sync.SemaphoreAndMutexImpl$$InternalSyntheticThrowCCEIfNotNull$100$53e71bb053d7fc85253cad122a138acc8094b705e6cfa9538602410855fb8511$0
-kotlinx.coroutines.sync.SemaphoreAndMutexImpl$$InternalSyntheticThrowCCEIfNotNull$46$bc1b2b27010cca2cc3c424c5ae459175121a025d3d377f17a7bfbf2805f11659$0
+kotlinx.coroutines.sync.SemaphoreAndMutexImpl$$InternalSyntheticThrowCCEIfNotNull$81$bc1b2b27010cca2cc3c424c5ae459175121a025d3d377f17a7bfbf2805f11659$0
+kotlinx.coroutines.sync.SemaphoreAndMutexImpl$$InternalSyntheticThrowCCEIfNotNull$84$53e71bb053d7fc85253cad122a138acc8094b705e6cfa9538602410855fb8511$0
 kotlinx.coroutines.sync.SemaphoreAndMutexImpl$addAcquireToQueue$createNewSegment$1:
     public final kotlinx.coroutines.sync.SemaphoreSegment invoke()
 kotlinx.coroutines.sync.SemaphoreAndMutexImpl$tryResumeNextFromQueue$createNewSegment$1:
@@ -56122,7 +56125,6 @@ kotlinx.serialization.encoding.AbstractEncoder:
     public final kotlinx.serialization.encoding.Encoder encodeInlineElement(kotlinx.serialization.descriptors.SerialDescriptor,int)
     public abstract void encodeShort(short)
     public abstract void encodeShortElement()
-    public final void encodeStringElement(kotlinx.serialization.descriptors.SerialDescriptor,int,java.lang.String)
     public void endStructure(kotlinx.serialization.descriptors.SerialDescriptor)
     public boolean shouldEncodeElementDefault(kotlinx.serialization.descriptors.SerialDescriptor)
 kotlinx.serialization.encoding.CompositeDecoder$DefaultImpls
@@ -56352,9 +56354,9 @@ kotlinx.serialization.json.JsonPrimitive
 kotlinx.serialization.json.JsonPrimitiveSerializer
 kotlinx.serialization.json.JsonSchemaCacheKt
 kotlinx.serialization.json.internal.AbstractJsonLexer
-kotlinx.serialization.json.internal.AbstractJsonTreeDecoder$$InternalSyntheticThrowCCEIfNotNull$132$64f3dd7badda3d369171e533cfc0ac553db8ffcfc122bd001f7b385b9e7d91b0$0
-kotlinx.serialization.json.internal.AbstractJsonTreeDecoder$$InternalSyntheticThrowCCEIfNotNull$132$64f3dd7badda3d369171e533cfc0ac553db8ffcfc122bd001f7b385b9e7d91b0$1
-kotlinx.serialization.json.internal.AbstractJsonTreeDecoder$$InternalSyntheticThrowCCEIfNotNull$132$64f3dd7badda3d369171e533cfc0ac553db8ffcfc122bd001f7b385b9e7d91b0$2
+kotlinx.serialization.json.internal.AbstractJsonTreeDecoder$$InternalSyntheticThrowCCEIfNotNull$151$64f3dd7badda3d369171e533cfc0ac553db8ffcfc122bd001f7b385b9e7d91b0$0
+kotlinx.serialization.json.internal.AbstractJsonTreeDecoder$$InternalSyntheticThrowCCEIfNotNull$151$64f3dd7badda3d369171e533cfc0ac553db8ffcfc122bd001f7b385b9e7d91b0$1
+kotlinx.serialization.json.internal.AbstractJsonTreeDecoder$$InternalSyntheticThrowCCEIfNotNull$151$64f3dd7badda3d369171e533cfc0ac553db8ffcfc122bd001f7b385b9e7d91b0$2
 kotlinx.serialization.json.internal.AbstractJsonTreeDecoder
 kotlinx.serialization.json.internal.CharArrayPool:
     public static void release()
@@ -56425,15 +56427,15 @@ kotlinx.serialization.json.internal.JsonTreeMapDecoder
 kotlinx.serialization.json.internal.JsonTreeReader$readDeepRecursive$1
 kotlinx.serialization.json.internal.JsonTreeReader$readObject$2
 kotlinx.serialization.json.internal.JsonTreeReader
-kotlinx.serialization.json.internal.PolymorphicKt$$InternalSyntheticThrowCCEIfNotNull$52$2982e64061d0001db0fad110e69b7296e570b08c42d7088a395f302a16a04805$0
+kotlinx.serialization.json.internal.PolymorphicKt$$InternalSyntheticThrowCCEIfNotNull$51$2982e64061d0001db0fad110e69b7296e570b08c42d7088a395f302a16a04805$0
 kotlinx.serialization.json.internal.PolymorphicKt$WhenMappings
 kotlinx.serialization.json.internal.PolymorphicKt
 kotlinx.serialization.json.internal.PolymorphismValidator
-kotlinx.serialization.json.internal.StreamingJsonDecoder$$InternalSyntheticThrowCCEIfNotNull$135$7dc0b9f21d2406bef974d58bcf76e007e1ad1770a6b18ec7cf66a628bbf6b5af$0
-kotlinx.serialization.json.internal.StreamingJsonDecoder$$InternalSyntheticThrowCCEIfNotNull$135$7dc0b9f21d2406bef974d58bcf76e007e1ad1770a6b18ec7cf66a628bbf6b5af$1
-kotlinx.serialization.json.internal.StreamingJsonDecoder$$InternalSyntheticThrowCCEIfNotNull$135$7dc0b9f21d2406bef974d58bcf76e007e1ad1770a6b18ec7cf66a628bbf6b5af$2
-kotlinx.serialization.json.internal.StreamingJsonDecoder$$InternalSyntheticThrowCCEIfNotNull$135$7dc0b9f21d2406bef974d58bcf76e007e1ad1770a6b18ec7cf66a628bbf6b5af$3
-kotlinx.serialization.json.internal.StreamingJsonDecoder$$InternalSyntheticThrowCCEIfNotNull$135$7dc0b9f21d2406bef974d58bcf76e007e1ad1770a6b18ec7cf66a628bbf6b5af$4
+kotlinx.serialization.json.internal.StreamingJsonDecoder$$InternalSyntheticThrowCCEIfNotNull$154$7dc0b9f21d2406bef974d58bcf76e007e1ad1770a6b18ec7cf66a628bbf6b5af$0
+kotlinx.serialization.json.internal.StreamingJsonDecoder$$InternalSyntheticThrowCCEIfNotNull$154$7dc0b9f21d2406bef974d58bcf76e007e1ad1770a6b18ec7cf66a628bbf6b5af$1
+kotlinx.serialization.json.internal.StreamingJsonDecoder$$InternalSyntheticThrowCCEIfNotNull$154$7dc0b9f21d2406bef974d58bcf76e007e1ad1770a6b18ec7cf66a628bbf6b5af$2
+kotlinx.serialization.json.internal.StreamingJsonDecoder$$InternalSyntheticThrowCCEIfNotNull$154$7dc0b9f21d2406bef974d58bcf76e007e1ad1770a6b18ec7cf66a628bbf6b5af$3
+kotlinx.serialization.json.internal.StreamingJsonDecoder$$InternalSyntheticThrowCCEIfNotNull$154$7dc0b9f21d2406bef974d58bcf76e007e1ad1770a6b18ec7cf66a628bbf6b5af$4
 kotlinx.serialization.json.internal.StreamingJsonDecoder$WhenMappings
 kotlinx.serialization.json.internal.StreamingJsonDecoder:
     public kotlinx.serialization.json.internal.StreamingJsonDecoder$DiscriminatorHolder discriminatorHolder
@@ -56456,8 +56458,8 @@ kotlinx.serialization.json.internal.StreamingJsonDecoder:
     public static boolean handleUnknown()
     public static void skipLeftoverElements()
     public static boolean trySkip()
-kotlinx.serialization.json.internal.StreamingJsonEncoder$$InternalSyntheticThrowCCEIfNotNull$73$c607377ba585e73c37720c452ed6590330efad2948d077ecd9bf73c54b7ece23$0
-kotlinx.serialization.json.internal.StreamingJsonEncoder$$InternalSyntheticThrowCCEIfNotNull$73$c607377ba585e73c37720c452ed6590330efad2948d077ecd9bf73c54b7ece23$1
+kotlinx.serialization.json.internal.StreamingJsonEncoder$$InternalSyntheticThrowCCEIfNotNull$72$c607377ba585e73c37720c452ed6590330efad2948d077ecd9bf73c54b7ece23$0
+kotlinx.serialization.json.internal.StreamingJsonEncoder$$InternalSyntheticThrowCCEIfNotNull$72$c607377ba585e73c37720c452ed6590330efad2948d077ecd9bf73c54b7ece23$1
 kotlinx.serialization.json.internal.StreamingJsonEncoder$WhenMappings
 kotlinx.serialization.json.internal.StreamingJsonEncoder:
     public final kotlinx.serialization.modules.SerialModuleImpl serializersModule
