@@ -39,9 +39,9 @@ export default function SessionSummary({ session, onDone }) {
       ctx.fillText(dateStr, 40, 96);
 
       const cards = [
-        { label: 'Total Time', value: formatDurationLong(durationMs) },
-        { label: 'Breaks Taken', value: breaksTaken, color: '#34d399' },
-        { label: 'Breaks Skipped', value: breaksSkipped, color: '#64748b' },
+        { label: 'Total Time', value: formatDurationLong(session.durationMs) },
+        { label: 'Breaks Taken', value: session.breaksTaken, color: '#34d399' },
+        { label: 'Breaks Skipped', value: session.breaksSkipped, color: '#64748b' },
         { label: 'Compliance', value: `${Math.round(complianceRate * 100)}%`, color: '#818cf8' },
       ];
 
@@ -90,7 +90,7 @@ export default function SessionSummary({ session, onDone }) {
       console.error('Share failed:', err);
     }
     setSharing(false);
-  }, [session, durationMs, breaksTaken, breaksSkipped, complianceRate, totalBreaks]);
+  }, [session, complianceRate, totalBreaks]);
 
   return (
     <div className="session-summary">

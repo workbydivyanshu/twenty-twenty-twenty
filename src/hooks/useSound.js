@@ -1,7 +1,16 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 
 export function useSound() {
   const ctxRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (ctxRef.current) {
+        ctxRef.current.close();
+        ctxRef.current = null;
+      }
+    };
+  }, []);
 
   const getCtx = useCallback(() => {
     if (!ctxRef.current) {

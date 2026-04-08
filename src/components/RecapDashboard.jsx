@@ -201,24 +201,24 @@ export default function RecapDashboard() {
         <EmptyState />
       ) : (
         <>
-          {sessions.length > 0 && (
-            <>
-              <StreakCalendar days={streakDays} />
+      {sessions.length > 0 && stats && (
+        <>
+          <StreakCalendar days={streakDays} />
 
-              <div className="recap-section-title">Overview</div>
-              <div className="recap-overview">
-                <StatCard value={stats.count} label="Sessions" delay={1} />
-                <StatCard value={formatDurationLong(stats.totalTime)} label="Total Time" delay={2} />
-                <StatCard value={formatDurationLong(stats.longestSession)} label="Longest Session" delay={3} />
-                <StatCard value={formatDurationLong(stats.avgDuration)} label="Avg Session" delay={4} />
-                <StatCard value={stats.totalBreaksTaken} label="Breaks Taken" delay={5} />
-                <StatCard
-                  value={stats.streakDays > 0 ? `${stats.streakDays}d` : '—'}
-                  label="Streak"
-                  delay={6}
-                  accent={stats.streakDays > 0 ? 'var(--warning)' : undefined}
-                />
-              </div>
+          <div className="recap-section-title">Overview</div>
+          <div className="recap-overview">
+            <StatCard value={stats.count} label="Sessions" delay={1} />
+            <StatCard value={formatDurationLong(stats.totalTime)} label="Total Time" delay={2} />
+            <StatCard value={formatDurationLong(stats.longestSession)} label="Longest Session" delay={3} />
+            <StatCard value={formatDurationLong(stats.avgDuration)} label="Avg Session" delay={4} />
+            <StatCard value={stats.totalBreaksTaken} label="Breaks Taken" delay={5} />
+            <StatCard
+              value={stats.streakDays > 0 ? `${stats.streakDays}d` : '—'}
+              label="Streak"
+              delay={6}
+              accent={stats.streakDays > 0 ? 'var(--warning)' : undefined}
+            />
+          </div>
 
               {tab !== 'year' && (
                 <>

@@ -20,5 +20,6 @@ data class Settings(
     val notificationsEnabled: Boolean = true,
     val soundEnabled: Boolean = true,
     val volume: Float = 0.7f,
-    val onboardingComplete: Boolean = false
+    val onboardingComplete: Boolean = false,
+    val activeProfileId: String = "default"
 )

@@ -47,6 +47,16 @@ export function formatPercentage(value, decimals = 0) {
   return `${(value * 100).toFixed(decimals)}%`;
 }
 
+export function formatNextBreak(seconds) {
+  if (seconds === null) return null;
+  if (seconds >= 60) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}m ${s}s`;
+  }
+  return `${seconds}s`;
+}
+
 export function getWeekStart(date = new Date()) {
   const d = new Date(date);
   d.setDate(d.getDate() - d.getDay());

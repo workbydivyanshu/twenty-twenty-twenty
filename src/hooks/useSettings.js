@@ -72,10 +72,16 @@ export function useSettings() {
       setItem('twenty-v2-profiles', next);
       return next;
     });
-    if (settings.activeProfileId === id) {
-      updateSetting('activeProfileId', profiles.filter(p => p.id !== id)[0]?.id || 'default');
-    }
-  }, [profiles, settings.activeProfileId, updateSetting]);
+    setSettings(prev => {
+      if (prev.activeProfileId === id) {
+        const remaining = profiles.filter(p => p.id !== id);
+        const next = { ...prev, activeProfileId: remaining[0]?.id || 'default' };
+        setItem(SETTINGS_KEY, next);
+        return next;
+      }
+      return prev;
+    });
+  }, [profiles]);
 
   const requestNotificationPermission = useCallback(async () => {
     if (!('Notification' in window)) return 'unsupported';

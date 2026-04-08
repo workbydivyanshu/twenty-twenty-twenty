@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useRef } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { useTimer } from '../hooks/useTimer';
 import { useBreakInterval } from '../hooks/useBreakInterval';
@@ -29,6 +29,14 @@ export function SessionProvider({ children, activeProfileId = 'default' })
 	const { saveSession } = useSessionStore(currentProfileId);
 	const countdownRef = useRef(null);
 	const lastBreakElapsedRef = useRef(0);
+
+	useEffect(() => {
+		return () => {
+			if (countdownRef.current) {
+				clearInterval(countdownRef.current);
+			}
+		};
+	}, []);
 
 	const handleBreakTrigger = useCallback(() => {
 		lastBreakElapsedRef.current = getElapsed();

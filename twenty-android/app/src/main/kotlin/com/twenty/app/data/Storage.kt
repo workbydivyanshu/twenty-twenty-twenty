@@ -46,5 +46,5 @@ class Storage(private val context: Context) {
         }
     }
 
-    fun generateId(): String = "${System.currentTimeMillis().toString(36)}-${(Math.random() * 1e6).toLong().toString(36)}"
+    fun generateId(): String = java.util.UUID.randomUUID().toString()
 }

@@ -676,7 +676,6 @@ button:focus-visible {
   font-size: 64px;
   font-weight: 300;
   letter-spacing: -4px;
-  padding-right: 4px;
   color: var(--text-primary);
   font-variant-numeric: tabular-nums;
   line-height: 1;

@@ -12,29 +12,7 @@ import Onboarding from './components/Onboarding';
 import ProfileSelector from './components/ProfileSelector';
 import { SessionProvider, useSession } from './contexts/SessionContext';
 import { SettingsProvider, useAppSettings } from './contexts/SettingsContext';
-
-function formatNextBreak(seconds)
-{
-	if (seconds === null) return null;
-	if (seconds >= 60) {
-		const m = Math.floor(seconds / 60);
-		const s = seconds % 60;
-		return `${m}m ${s}s`;
-	}
-	return `${seconds}s`;
-}
-
-function formatDuration(ms)
-{
-	const totalSeconds = Math.floor(ms / 1000);
-	const hours = Math.floor(totalSeconds / 3600);
-	const minutes = Math.floor((totalSeconds % 3600) / 60);
-	const seconds = totalSeconds % 60;
-	if (hours > 0) {
-		return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-	}
-	return `${minutes}:${String(seconds).padStart(2, '0')}`;
-}
+import { formatDuration, formatNextBreak } from './utils/dateUtils';
 
 function AppShell()
 {
