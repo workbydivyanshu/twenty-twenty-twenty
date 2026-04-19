@@ -45,7 +45,7 @@ class TimerViewModel : ViewModel()
 	{
 		if (_isRunning.value) return
 		sessionStartTime = System.currentTimeMillis() - pausedElapsed
-		lastBreakTime = sessionStartTime ?: 0
+		lastBreakTime = 0
 		_isRunning.value = true
 		startTick()
 		startBreakInterval()
